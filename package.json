@@ -1,0 +1,45 @@
+{
+  "name": "NodeBoilerplate",
+  "description": "A framework for getting started quickly with new projects in node.js",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "connect-redis": "^2.1.0",
+    "express": "4.8.7",
+    "express-session": "^1.9.2",
+    "jade": "^1.7.0",
+    "lodash": "^2.4.1",
+    "redis": "^0.12.1",
+    "winston": "^0.8.3"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.8",
+    "browserify-shim": "^3.8.3",
+    "chai": "^2.2.0",
+    "del": "^0.1.3",
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^2.0.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-cache": "^0.2.4",
+    "gulp-concat": "^2.4.2",
+    "gulp-imagemin": "^2.0.0",
+    "gulp-jshint": "^1.9.0",
+    "gulp-less": "^1.3.6",
+    "gulp-livereload": "^2.1.1",
+    "gulp-minify-css": "^0.3.11",
+    "gulp-mocha": "^2.0.1",
+    "gulp-mocha-phantomjs": "^0.6.1",
+    "gulp-notify": "^2.0.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.0.1",
+    "mocha": "^2.2.4"
+  },
+  "browserify-shim": {
+    "jquery": "$"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  }
+}

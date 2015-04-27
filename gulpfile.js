@@ -116,13 +116,18 @@ gulp.task("minify", ["styles"], function() {
 });
 
 /**
- * Copy Task
+ * Copy Tasks
  */
-gulp.task("copy", function(){
+gulp.task("copy-images", function(){
   gulp.src("./lib/client/img/*")
     .pipe(gulp.dest("./static/img"));
 });
+gulp.task("copy-bootstrap", function(){
+  gulp.src("./lib/client/bootstrap-3.3.1/dist/js/bootstrap.min.js")
+    .pipe(gulp.dest("./static/js/"));
+});
 
+gulp.task("copy", ["copy-images", "copy-bootstrap"]);
 /**
  * Client Watch
  */

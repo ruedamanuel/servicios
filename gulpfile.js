@@ -116,6 +116,14 @@ gulp.task("minify", ["styles"], function() {
 });
 
 /**
+ * Copy Task
+ */
+gulp.task("copy", function(){
+  gulp.src("./lib/client/img/*")
+    .pipe(gulp.dest("./static/img"));
+});
+
+/**
  * Client Watch
  */
 gulp.task("watch", function() {
@@ -135,6 +143,6 @@ gulp.task("uglify", ["browserify-client"], function() {
 
 gulp.task("test", ["test-server", "test-client"]);
 
-gulp.task("build", ["lint-server", "uglify", "minify"]);
+gulp.task("build", ["lint-server", "uglify", "minify", "copy"]);
 
 gulp.task("default", ["test-server", "test-client", "build", "watch"]);

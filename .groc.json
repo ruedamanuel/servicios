@@ -1,0 +1,3 @@
+{
+  "glob": ["lib/client/scripts/**/*.js", "README.md", "lib/client/less/**/*.less", "lib/server/**/*.js"]
+}

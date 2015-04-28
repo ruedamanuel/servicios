@@ -126,8 +126,12 @@ gulp.task("copy-bootstrap", function(){
   gulp.src("./lib/client/bootstrap-3.3.1/dist/js/bootstrap.min.js")
     .pipe(gulp.dest("./static/js/"));
 });
+gulp.task("copy-views", function(){
+  gulp.src("./lib/client/views/**/*.html")
+    .pipe(gulp.dest("./static/views/"));
+});
 
-gulp.task("copy", ["copy-images", "copy-bootstrap"]);
+gulp.task("copy", ["copy-images", "copy-bootstrap", "copy-views"]);
 /**
  * Client Watch
  */
@@ -137,6 +141,7 @@ gulp.task("watch", function() {
   gulp.watch("./lib/test/client/**/*.js", ["test-client"]);
   gulp.watch("./lib/server/**/*.js", ["lint-server", "test-server"]);
   gulp.watch("./lib/test/server/**/*.js", ["test-server"]);
+  gulp.watch("./lib/client/views/**/*.html", ["copy-views"]);
 });
 
 gulp.task("uglify", ["browserify-client"], function() {

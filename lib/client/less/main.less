@@ -6,6 +6,27 @@
  */
 @import "../bootstrap-3.3.1/less/bootstrap.less";
 
+body.container-fluid{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+header{
+  width: 100%;
+  background-color: #EEEEEE;
+  border-bottom: 1px solid #AAAAAA;
+}
+.main{
+  width: 100%;
+  background-color: #FFFFFF;
+  border-top: 1px solid #666666;
+  border-bottom: 1px solid #666666;
+}
+footer{
+  width: 100%;
+  background-color: #AAAAAA;
+  border-top: 1px solid #999999;
+}
 .header-wrapper{
   max-width: 1200px;
   margin: 0 auto;
@@ -13,7 +34,36 @@
 .main-wrapper{
   max-width: 1200px;
   margin: 0 auto;
+  padding-bottom: 1em;
+}
+.footer-wrapper{
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .pre-formatted{
   padding: 1em;
+}
+.checkmark{
+  color: #00EE33;
+}
+.shadow-box{
+  margin-top: 1em;
+  border: 2px solid #EEEEEE;
+  border-radius: 5px;
+  background-color: rgba(80, 80, 80, 0.6);
+}
+
+/**
+ * Banner styles
+ */
+.home-banner{
+  background: url("/static/img/stock-photo-63303725-happy-customer-satisfied-with-auto-mechanic-s-great-service.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 200px;
+}
+.pop-font{
+  color: #FFFFFF;
+  text-shadow: 1px 1px #333333;
 }

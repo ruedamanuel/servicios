@@ -12,3 +12,6 @@ logs
 
 # ssl certificates
 ssl
+
+#Ignore Bower Components
+bower_components

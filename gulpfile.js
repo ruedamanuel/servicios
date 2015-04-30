@@ -14,6 +14,7 @@ var gulp = require("gulp"),
  * Build Dependencies
  */
 var browserify = require("gulp-browserify"),
+  mainBowerFiles = require("main-bower-files"),
   uglify = require("gulp-uglify");
 
 /**
@@ -79,6 +80,13 @@ gulp.task("browserify-test", ["lint-test-client"], function() {
     }))
     .pipe(rename("client-test.js"))
     .pipe(gulp.dest("./static/test"));
+});
+/**
+ * Bower Tasks
+ */
+gulp.task("get-bower-files", function(){
+  return gulp.src(mainBowerFiles(), "./bower_components")
+    .pipe(gulp.dest("./static/vendor"));
 });
 
 /**
@@ -153,6 +161,6 @@ gulp.task("uglify", ["browserify-client"], function() {
 
 gulp.task("test", ["test-server", "test-client"]);
 
-gulp.task("build", ["lint-server", "uglify", "minify", "copy"]);
+gulp.task("build", ["get-bower-files", "lint-server", "uglify", "minify", "copy"]);
 
 gulp.task("default", ["test-server", "test-client", "build", "watch"]);

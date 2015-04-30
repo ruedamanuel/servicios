@@ -5,6 +5,8 @@
  * in gulp with distribution versions that might already be prefixed and minified.
  */
 @import "../bootstrap-3.3.1/less/bootstrap.less";
+@import "../bootstrap-3.3.1/less/theme.less";
+@import (inline) "../../../bower_components/angular-ui-select/dist/select.css";
 
 body.container-fluid{
   padding-left: 0;
@@ -64,7 +66,23 @@ footer{
   background-position: center center;
   min-height: 200px;
 }
+@media screen and (min-width: 600px){
+  .home-banner{
+    background: url("/static/img/stock-photo-63303725-happy-customer-satisfied-with-auto-mechanic-s-great-service (1).jpg");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 400px;
+  }
+}
 .pop-font{
   color: #FFFFFF;
   text-shadow: 1px 1px #333333;
+}
+
+/**
+ * Added to remove inheritance from pop-font
+ */
+.ui-select-bootstrap{
+  text-shadow: none;
 }

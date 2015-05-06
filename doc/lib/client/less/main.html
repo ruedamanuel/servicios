@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><title>lib/client/less/main</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="lib/client/less/main"><meta name="groc-project-path" content="lib/client/less/main.less"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/client/less/main.less</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-comment">/**
+ * # Main LESS
+ *
+ * Bootstrap is imported to the main less file to avoid having to run concatenation tasks
+ * in gulp with distribution versions that might already be prefixed and minified.
+ */</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">"../bootstrap-3.3.1/less/bootstrap.less"</span>;</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">"../bootstrap-3.3.1/less/theme.less"</span>;</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> (inline) <span class="hljs-string">"../../../bower_components/angular-ui-select/dist/select.css"</span>;</span>
+
+<span class="hljs-tag">body</span><span class="hljs-class">.container-fluid</span>{
+  <span class="hljs-attribute">padding-left</span><span class="hljs-value">: <span class="hljs-number">0</span>;</span>
+  <span class="hljs-attribute">padding-right</span><span class="hljs-value">: <span class="hljs-number">0</span>;</span>
+}
+
+<span class="hljs-tag">header</span>{
+  <span class="hljs-attribute">width</span><span class="hljs-value">: <span class="hljs-number">100%</span>;</span>
+  <span class="hljs-attribute">background-color</span><span class="hljs-value">: <span class="hljs-hexcolor">#EEEEEE</span>;</span>
+  <span class="hljs-attribute">border-bottom</span><span class="hljs-value">: <span class="hljs-number">1px</span> solid <span class="hljs-hexcolor">#AAAAAA</span>;</span>
+}
+<span class="hljs-class">.main</span>{
+  <span class="hljs-attribute">width</span><span class="hljs-value">: <span class="hljs-number">100%</span>;</span>
+  <span class="hljs-attribute">background-color</span><span class="hljs-value">: <span class="hljs-hexcolor">#FFFFFF</span>;</span>
+  <span class="hljs-attribute">background-image</span><span class="hljs-value">: <span class="hljs-function">url</span>(<span class="hljs-string">"/static/img/grey_wash_wall.png"</span>);</span>
+  <span class="hljs-attribute">background-repeat</span><span class="hljs-value">: repeat;</span>
+  <span class="hljs-attribute">border-top</span><span class="hljs-value">: <span class="hljs-number">1px</span> solid <span class="hljs-hexcolor">#666666</span>;</span>
+  <span class="hljs-attribute">border-bottom</span><span class="hljs-value">: <span class="hljs-number">1px</span> solid <span class="hljs-hexcolor">#666666</span>;</span>
+}
+<span class="hljs-tag">footer</span>{
+  <span class="hljs-attribute">width</span><span class="hljs-value">: <span class="hljs-number">100%</span>;</span>
+  <span class="hljs-attribute">background-color</span><span class="hljs-value">: <span class="hljs-hexcolor">#AAAAAA</span>;</span>
+  <span class="hljs-attribute">border-top</span><span class="hljs-value">: <span class="hljs-number">1px</span> solid <span class="hljs-hexcolor">#999999</span>;</span>
+}
+<span class="hljs-class">.header-wrapper</span>{
+  <span class="hljs-attribute">max-width</span><span class="hljs-value">: <span class="hljs-number">1200px</span>;</span>
+  <span class="hljs-attribute">margin</span><span class="hljs-value">: <span class="hljs-number">0</span> auto;</span>
+}
+<span class="hljs-class">.main-wrapper</span>{
+  <span class="hljs-attribute">max-width</span><span class="hljs-value">: <span class="hljs-number">1200px</span>;</span>
+  <span class="hljs-attribute">margin</span><span class="hljs-value">: <span class="hljs-number">0</span> auto;</span>
+  <span class="hljs-attribute">padding-bottom</span><span class="hljs-value">: <span class="hljs-number">1em</span>;</span>
+}
+<span class="hljs-class">.footer-wrapper</span>{
+  <span class="hljs-attribute">max-width</span><span class="hljs-value">: <span class="hljs-number">1200px</span>;</span>
+  <span class="hljs-attribute">margin</span><span class="hljs-value">: <span class="hljs-number">0</span> auto;</span>
+}
+<span class="hljs-class">.pre-formatted</span>{
+  <span class="hljs-attribute">padding</span><span class="hljs-value">: <span class="hljs-number">1em</span>;</span>
+}
+<span class="hljs-class">.checkmark</span>{
+  <span class="hljs-attribute">color</span><span class="hljs-value">: <span class="hljs-hexcolor">#00EE33</span>;</span>
+}
+<span class="hljs-class">.shadow-box</span>{
+  <span class="hljs-attribute">margin</span><span class="hljs-value">: <span class="hljs-number">1em</span> <span class="hljs-number">0</span>;</span>
+  <span class="hljs-attribute">border</span><span class="hljs-value">: <span class="hljs-number">2px</span> solid <span class="hljs-hexcolor">#EEEEEE</span>;</span>
+  <span class="hljs-attribute">border-radius</span><span class="hljs-value">: <span class="hljs-number">5px</span>;</span>
+  <span class="hljs-attribute">background-color</span><span class="hljs-value">: <span class="hljs-function">rgba</span>(<span class="hljs-number">80</span>, <span class="hljs-number">80</span>, <span class="hljs-number">80</span>, <span class="hljs-number">0.6</span>);</span>
+  <span class="hljs-attribute">padding-bottom</span><span class="hljs-value">: <span class="hljs-number">1em</span>;</span>
+}
+
+<span class="hljs-comment">/**
+ * Banner styles
+ */</span>
+<span class="hljs-class">.home-banner</span>{
+  <span class="hljs-attribute">background</span><span class="hljs-value">: <span class="hljs-function">url</span>(<span class="hljs-string">"/static/img/stock-photo-63303725-happy-customer-satisfied-with-auto-mechanic-s-great-service.jpg"</span>);</span>
+  <span class="hljs-attribute">background-size</span><span class="hljs-value">: <span class="hljs-number">100%</span> auto;</span>
+  <span class="hljs-attribute">background-repeat</span><span class="hljs-value">: no-repeat;</span>
+  <span class="hljs-attribute">background-position</span><span class="hljs-value">: center center;</span>
+  <span class="hljs-attribute">min-height</span><span class="hljs-value">: <span class="hljs-number">200px</span>;</span>
+}
+<span class="hljs-at_rule">@<span class="hljs-keyword">media</span><span class="hljs-preprocessor"> screen</span><span class="hljs-preprocessor"> and</span> (min-width:<span class="hljs-preprocessor"> 600px</span>){</span>
+  <span class="hljs-class">.home-banner</span>{
+    <span class="hljs-attribute">background</span><span class="hljs-value">: <span class="hljs-function">url</span>(<span class="hljs-string">"/static/img/stock-photo-63303725-happy-customer-satisfied-with-auto-mechanic-s-great-service (1).jpg"</span>);</span>
+    <span class="hljs-attribute">background-size</span><span class="hljs-value">: <span class="hljs-number">100%</span> auto;</span>
+    <span class="hljs-attribute">background-repeat</span><span class="hljs-value">: no-repeat;</span>
+    <span class="hljs-attribute">background-position</span><span class="hljs-value">: center center;</span>
+    <span class="hljs-attribute">min-height</span><span class="hljs-value">: <span class="hljs-number">400px</span>;</span>
+  }
+}
+<span class="hljs-class">.pop-font</span>{
+  <span class="hljs-attribute">color</span><span class="hljs-value">: <span class="hljs-hexcolor">#FFFFFF</span>;</span>
+  <span class="hljs-attribute">text-shadow</span><span class="hljs-value">: <span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-hexcolor">#333333</span>;</span>
+}
+
+<span class="hljs-comment">/**
+ * Added to remove inheritance from pop-font
+ */</span>
+<span class="hljs-class">.ui-select-bootstrap</span>{
+  <span class="hljs-attribute">text-shadow</span><span class="hljs-value">: none;</span>
+}</div></div></div></div></body></html>

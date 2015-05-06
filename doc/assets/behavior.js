@@ -9,6 +9,32 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
       "type": "file",
       "data": {
         "language": {
+          "nameMatchers": [".md", ".markdown", ".mkd", ".mkdn", ".mdown"],
+          "commentsOnly": true,
+          "name": "Markdown"
+        },
+        "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/README.md",
+        "projectPath": "README.md",
+        "targetPath": "index",
+        "pageTitle": "index",
+        "firstHeader": {
+          "type": "heading",
+          "data": {
+            "level": 1,
+            "title": "Servicios",
+            "slug": "servicios",
+            "isFileHeader": true
+          },
+          "depth": 1
+        },
+        "title": "Servicios"
+      },
+      "depth": 1,
+      "outline": []
+    }, {
+      "type": "file",
+      "data": {
+        "language": {
           "nameMatchers": [".js"],
           "pygmentsLexer": "javascript",
           "multiLineComment": ["/*", "*", "*/"],
@@ -17,10 +43,10 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "foldPrefix": "^",
           "name": "JavaScript"
         },
-        "sourcePath": "/Users/manuelrueda/Documents/NodeBoilerplate/node-boilerplate/lib/client/scripts/client.js",
+        "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/client/scripts/client.js",
         "projectPath": "lib/client/scripts/client.js",
-        "targetPath": "index",
-        "pageTitle": "index",
+        "targetPath": "client",
+        "pageTitle": "client",
         "firstHeader": {
           "type": "heading",
           "data": {
@@ -38,8 +64,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
     }, {
       "type": "folder",
       "data": {
-        "path": "samples",
-        "title": "samples"
+        "path": "controllers",
+        "title": "controllers"
       },
       "depth": 1,
       "children": [
@@ -55,24 +81,24 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/manuelrueda/Documents/NodeBoilerplate/node-boilerplate/lib/client/scripts/samples/test.js",
-            "projectPath": "lib/client/scripts/samples/test.js",
-            "targetPath": "samples/test",
-            "pageTitle": "samples/test",
-            "title": "test"
-          },
-          "depth": 2,
-          "outline": [
-            {
+            "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/client/scripts/controllers/footer.js",
+            "projectPath": "lib/client/scripts/controllers/footer.js",
+            "targetPath": "controllers/footer",
+            "pageTitle": "controllers/footer",
+            "firstHeader": {
               "type": "heading",
               "data": {
                 "level": 1,
-                "title": "Testing the whole minification thing",
-                "slug": "testing-the-whole-minification-thing"
+                "title": "Client Footer Controller",
+                "slug": "client-footer-controller",
+                "isFileHeader": true
               },
               "depth": 1
-            }
-          ]
+            },
+            "title": "Client Footer Controller"
+          },
+          "depth": 2,
+          "outline": []
         }, {
           "type": "file",
           "data": {
@@ -85,11 +111,431 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/manuelrueda/Documents/NodeBoilerplate/node-boilerplate/lib/client/scripts/samples/test2.js",
-            "projectPath": "lib/client/scripts/samples/test2.js",
-            "targetPath": "samples/test2",
-            "pageTitle": "samples/test2",
-            "title": "test2"
+            "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/client/scripts/controllers/header.js",
+            "projectPath": "lib/client/scripts/controllers/header.js",
+            "targetPath": "controllers/header",
+            "pageTitle": "controllers/header",
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Header Controller",
+                "slug": "header-controller",
+                "isFileHeader": true
+              },
+              "depth": 1
+            },
+            "title": "Header Controller"
+          },
+          "depth": 2,
+          "outline": []
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "multiLineComment": ["/*", "*", "*/"],
+              "singleLineComment": ["//"],
+              "ignorePrefix": "}",
+              "foldPrefix": "^",
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/client/scripts/controllers/home.js",
+            "projectPath": "lib/client/scripts/controllers/home.js",
+            "targetPath": "controllers/home",
+            "pageTitle": "controllers/home",
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Home Controller",
+                "slug": "home-controller",
+                "isFileHeader": true
+              },
+              "depth": 1
+            },
+            "title": "Home Controller"
+          },
+          "depth": 2,
+          "outline": []
+        }
+      ]
+    }, {
+      "type": "folder",
+      "data": {
+        "path": "directives",
+        "title": "directives"
+      },
+      "depth": 1,
+      "children": [
+        {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "multiLineComment": ["/*", "*", "*/"],
+              "singleLineComment": ["//"],
+              "ignorePrefix": "}",
+              "foldPrefix": "^",
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/client/scripts/directives/index.js",
+            "projectPath": "lib/client/scripts/directives/index.js",
+            "targetPath": "directives/index",
+            "pageTitle": "directives/index",
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Directives Index",
+                "slug": "directives-index",
+                "isFileHeader": true
+              },
+              "depth": 1
+            },
+            "title": "Directives Index"
+          },
+          "depth": 2,
+          "outline": []
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "multiLineComment": ["/*", "*", "*/"],
+              "singleLineComment": ["//"],
+              "ignorePrefix": "}",
+              "foldPrefix": "^",
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/client/scripts/directives/sServiceSearch.js",
+            "projectPath": "lib/client/scripts/directives/sServiceSearch.js",
+            "targetPath": "directives/sServiceSearch",
+            "pageTitle": "directives/sServiceSearch",
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Service Search Directive",
+                "slug": "service-search-directive",
+                "isFileHeader": true
+              },
+              "depth": 1
+            },
+            "title": "Service Search Directive"
+          },
+          "depth": 2,
+          "outline": []
+        }
+      ]
+    }, {
+      "type": "folder",
+      "data": {
+        "path": "filters",
+        "title": "filters"
+      },
+      "depth": 1,
+      "children": [
+        {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "multiLineComment": ["/*", "*", "*/"],
+              "singleLineComment": ["//"],
+              "ignorePrefix": "}",
+              "foldPrefix": "^",
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/client/scripts/filters/index.js",
+            "projectPath": "lib/client/scripts/filters/index.js",
+            "targetPath": "filters/index",
+            "pageTitle": "filters/index",
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Filters Index",
+                "slug": "filters-index",
+                "isFileHeader": true
+              },
+              "depth": 1
+            },
+            "title": "Filters Index"
+          },
+          "depth": 2,
+          "outline": []
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "multiLineComment": ["/*", "*", "*/"],
+              "singleLineComment": ["//"],
+              "ignorePrefix": "}",
+              "foldPrefix": "^",
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/client/scripts/filters/propsFilter.js",
+            "projectPath": "lib/client/scripts/filters/propsFilter.js",
+            "targetPath": "filters/propsFilter",
+            "pageTitle": "filters/propsFilter",
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Props Filter",
+                "slug": "props-filter",
+                "isFileHeader": true
+              },
+              "depth": 1
+            },
+            "title": "Props Filter"
+          },
+          "depth": 2,
+          "outline": []
+        }
+      ]
+    }, {
+      "type": "folder",
+      "data": {
+        "path": "lib",
+        "title": "lib"
+      },
+      "depth": 1,
+      "children": [
+        {
+          "type": "folder",
+          "data": {
+            "path": "lib/client",
+            "title": "client"
+          },
+          "depth": 2,
+          "children": [
+            {
+              "type": "folder",
+              "data": {
+                "path": "lib/client/less",
+                "title": "less"
+              },
+              "depth": 3,
+              "children": [
+                {
+                  "type": "file",
+                  "data": {
+                    "language": {
+                      "nameMatchers": [".less"],
+                      "pygmentsLexer": "sass",
+                      "highlightJS": "scss",
+                      "singleLineComment": ["//"],
+                      "ignorePrefix": "}",
+                      "foldPrefix": "^",
+                      "name": "LESS"
+                    },
+                    "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/client/less/main.less",
+                    "projectPath": "lib/client/less/main.less",
+                    "targetPath": "lib/client/less/main",
+                    "pageTitle": "lib/client/less/main",
+                    "title": "main"
+                  },
+                  "depth": 4,
+                  "outline": []
+                }
+              ]
+            }
+          ]
+        }, {
+          "type": "folder",
+          "data": {
+            "path": "lib/server",
+            "title": "server"
+          },
+          "depth": 2,
+          "children": [
+            {
+              "type": "folder",
+              "data": {
+                "path": "lib/server/routes",
+                "title": "routes"
+              },
+              "depth": 3,
+              "children": [
+                {
+                  "type": "file",
+                  "data": {
+                    "language": {
+                      "nameMatchers": [".js"],
+                      "pygmentsLexer": "javascript",
+                      "multiLineComment": ["/*", "*", "*/"],
+                      "singleLineComment": ["//"],
+                      "ignorePrefix": "}",
+                      "foldPrefix": "^",
+                      "name": "JavaScript"
+                    },
+                    "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/server/routes/home.js",
+                    "projectPath": "lib/server/routes/home.js",
+                    "targetPath": "lib/server/routes/home",
+                    "pageTitle": "lib/server/routes/home",
+                    "firstHeader": {
+                      "type": "heading",
+                      "data": {
+                        "level": 1,
+                        "title": "Home Routes",
+                        "slug": "home-routes",
+                        "isFileHeader": true
+                      },
+                      "depth": 1
+                    },
+                    "title": "Home Routes"
+                  },
+                  "depth": 4,
+                  "outline": []
+                }, {
+                  "type": "file",
+                  "data": {
+                    "language": {
+                      "nameMatchers": [".js"],
+                      "pygmentsLexer": "javascript",
+                      "multiLineComment": ["/*", "*", "*/"],
+                      "singleLineComment": ["//"],
+                      "ignorePrefix": "}",
+                      "foldPrefix": "^",
+                      "name": "JavaScript"
+                    },
+                    "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/server/routes/landing.js",
+                    "projectPath": "lib/server/routes/landing.js",
+                    "targetPath": "lib/server/routes/landing",
+                    "pageTitle": "lib/server/routes/landing",
+                    "firstHeader": {
+                      "type": "heading",
+                      "data": {
+                        "level": 1,
+                        "title": "Landing Routes",
+                        "slug": "landing-routes",
+                        "isFileHeader": true
+                      },
+                      "depth": 1
+                    },
+                    "title": "Landing Routes"
+                  },
+                  "depth": 4,
+                  "outline": []
+                }, {
+                  "type": "file",
+                  "data": {
+                    "language": {
+                      "nameMatchers": [".js"],
+                      "pygmentsLexer": "javascript",
+                      "multiLineComment": ["/*", "*", "*/"],
+                      "singleLineComment": ["//"],
+                      "ignorePrefix": "}",
+                      "foldPrefix": "^",
+                      "name": "JavaScript"
+                    },
+                    "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/server/routes/urlMap.js",
+                    "projectPath": "lib/server/routes/urlMap.js",
+                    "targetPath": "lib/server/routes/urlMap",
+                    "pageTitle": "lib/server/routes/urlMap",
+                    "firstHeader": {
+                      "type": "heading",
+                      "data": {
+                        "level": 1,
+                        "title": "URL Map",
+                        "slug": "url-map",
+                        "isFileHeader": true
+                      },
+                      "depth": 1
+                    },
+                    "title": "URL Map"
+                  },
+                  "depth": 4,
+                  "outline": []
+                }
+              ]
+            }, {
+              "type": "folder",
+              "data": {
+                "path": "lib/server/utils",
+                "title": "utils"
+              },
+              "depth": 3,
+              "children": [
+                {
+                  "type": "file",
+                  "data": {
+                    "language": {
+                      "nameMatchers": [".js"],
+                      "pygmentsLexer": "javascript",
+                      "multiLineComment": ["/*", "*", "*/"],
+                      "singleLineComment": ["//"],
+                      "ignorePrefix": "}",
+                      "foldPrefix": "^",
+                      "name": "JavaScript"
+                    },
+                    "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/server/utils/logger.js",
+                    "projectPath": "lib/server/utils/logger.js",
+                    "targetPath": "lib/server/utils/logger",
+                    "pageTitle": "lib/server/utils/logger",
+                    "firstHeader": {
+                      "type": "heading",
+                      "data": {
+                        "level": 1,
+                        "title": "Log Utility",
+                        "slug": "log-utility",
+                        "isFileHeader": true
+                      },
+                      "depth": 1
+                    },
+                    "title": "Log Utility"
+                  },
+                  "depth": 4,
+                  "outline": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }, {
+      "type": "folder",
+      "data": {
+        "path": "router",
+        "title": "router"
+      },
+      "depth": 1,
+      "children": [
+        {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".js"],
+              "pygmentsLexer": "javascript",
+              "multiLineComment": ["/*", "*", "*/"],
+              "singleLineComment": ["//"],
+              "ignorePrefix": "}",
+              "foldPrefix": "^",
+              "name": "JavaScript"
+            },
+            "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/client/scripts/router/index.js",
+            "projectPath": "lib/client/scripts/router/index.js",
+            "targetPath": "router/index",
+            "pageTitle": "router/index",
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "UI Router Index",
+                "slug": "ui-router-index",
+                "isFileHeader": true
+              },
+              "depth": 1
+            },
+            "title": "UI Router Index"
           },
           "depth": 2,
           "outline": []

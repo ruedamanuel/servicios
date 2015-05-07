@@ -15,3 +15,6 @@ ssl
 
 #Ignore Bower Components
 bower_components
+
+#Ignore Dev configuration
+*dev.js

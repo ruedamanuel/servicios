@@ -1,6 +1,6 @@
 {
-  "name": "NodeBoilerplate",
-  "description": "A framework for getting started quickly with new projects in node.js",
+  "name": "Servicios",
+  "description": "Proyecto de JJR y MR",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -9,6 +9,8 @@
     "express-session": "^1.9.2",
     "jade": "^1.7.0",
     "lodash": "^2.4.1",
+    "mysql": "^2.6.2",
+    "q": "^1.3.0",
     "redis": "^0.12.1",
     "winston": "^0.8.3"
   },

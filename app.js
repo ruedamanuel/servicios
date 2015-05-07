@@ -48,6 +48,25 @@ sessionOptions.store = new RedisStore({
 		});
 
 /**
+ * Initialize MySQL
+ */
+
+var mysql = require("./lib/server/services/mysql");
+mysql.init(config.mysql);
+/**
+ * Sample MySQL query using the proprietary service:
+ *
+ * @example
+ *  mysql.query("SELECT * FROM profession WHERE id > ?", [5])
+ *    .then(function(result){
+ *      log.info("it works: ", result);
+ *    })
+ *    .catch(function(e){
+ *      log.error("Failed: ", e);
+ *    });
+ */
+
+/**
  * Set Jade as default view template engine.
  */
 app.set("views", "./lib/server/views");

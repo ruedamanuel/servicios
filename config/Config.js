@@ -66,6 +66,14 @@ var Config = function(){
 	 			}
 	 		]
 	};
+  /**
+   * MySQL Parameters
+   */
+  this.mysql = {
+    host: "127.0.0.1",
+    user: "root",
+    password: ""
+  };
 };
 
  module.exports = Config;

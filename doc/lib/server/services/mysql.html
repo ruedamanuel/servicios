@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"><head><title>lib/server/services/mysql</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="lib/server/services/mysql"><meta name="groc-project-path" content="lib/server/services/mysql.js"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/server/services/mysql.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="mysql-database-service">MySQL Database Service</h1>
+<p>Manages the connection pool that interfaces with the
+MySQL database that manages the persistent storage of
+the application.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+
+<span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">"mysql"</span>),
+  log = <span class="hljs-built_in">require</span>(<span class="hljs-string">"../utils/logger"</span>),
+  pool = <span class="hljs-literal">null</span>,
+  q = <span class="hljs-built_in">require</span>(<span class="hljs-string">"q"</span>),
+  format = <span class="hljs-built_in">require</span>(<span class="hljs-string">"../utils/formatter"</span>);
+
+<span class="hljs-built_in">module</span>.exports = {</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method Mysql.init</span></p>
+<p>Initializes MySQL connection pool.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>params must be an Object.</strong></li>
+</ul></div></div><div class="code"><div class="wrapper">  init: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(params)</span></span>{</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Check that all necessary parameters are in the params object</p></div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">if</span>(params.hasOwnProperty(<span class="hljs-string">"host"</span>) &amp;&amp;
+      params.hasOwnProperty(<span class="hljs-string">"user"</span>) &amp;&amp;
+      params.hasOwnProperty(<span class="hljs-string">"password"</span>)){
+      pool = mysql.createPool(params);
+      pool.getConnection(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, connection)</span> </span>{</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Use the connection</p></div></div><div class="code"><div class="wrapper">        connection.query(<span class="hljs-string">"SELECT * FROM `profession` LIMIT 5"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, rows)</span> </span>{
+          <span class="hljs-keyword">if</span>(err){
+            log.error(<span class="hljs-string">"ERROR: "</span>, err);
+          }<span class="hljs-keyword">else</span>{
+            log.info(<span class="hljs-string">"SUCCESS: "</span>, rows);
+          }
+          connection.release();</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Don&#39;t use the connection here, it has been returned to the pool.</p></div></div><div class="code"><div class="wrapper">        });
+      });
+    }<span class="hljs-keyword">else</span>{
+      log.error(<span class="hljs-string">"Parameters for establishing connection with MySQL are incomplete"</span>);
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>();
+    }
+  },</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method Mysql.query</span></p>
+<p>Checks out a connection and performs the query provided.</p>
+<p>Parameters:</p>
+<ul>
+<li><p><strong>query must be a String.</strong></p>
+</li>
+<li><p><strong>values must be an Array.</strong></p>
+</li>
+</ul>
+<p><strong>Returns a Promise</strong></p>
+<p>Example:</p>
+<pre><code>mysql.query(&quot;SELECT * FROM profession WHERE id &gt; ?&quot;, [5])
+  .then(function(result){
+    log.info(&quot;it works: &quot;, result);
+  })
+  .catch(function(e){
+    log.error(&quot;Failed: &quot;, e);
+  });</code></pre></div></div><div class="code"><div class="wrapper">  query: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(query, values)</span></span>{
+    <span class="hljs-keyword">return</span> q.Promise(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(resolve, reject)</span></span>{
+      pool.getConnection(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, connection)</span></span>{
+        <span class="hljs-keyword">if</span>(error){
+          reject(error);
+        }<span class="hljs-keyword">else</span>{
+          connection.query(query, values, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, rows)</span></span>{
+            <span class="hljs-keyword">if</span>(err){
+              reject(err);
+            }<span class="hljs-keyword">else</span>{
+              resolve(format.camelCaseArray(rows));
+            }
+            connection.release();
+          });
+        }
+      });
+    });
+  }
+};</div></div></div></div></body></html>

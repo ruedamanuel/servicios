@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><title>lib/server/utils/formatter</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="lib/server/utils/formatter"><meta name="groc-project-path" content="lib/server/utils/formatter.js"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/server/utils/formatter.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="formatter-utility">Formatter Utility</h1>
+<p>Helper for switching strings between underscore separators
+and camel case.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">"lodash"</span>);</div></div></div><div class="segment"><div class="comments doc-section doc-section-private"><div class="wrapper"><p><span class='doc-section-header'>Private method capitaliseFirstLetter</span></p>
+<p>Capitalizes the first letter of a string.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>string must be a String.</strong></li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">capitaliseFirstLetter</span><span class="hljs-params">(string)</span></span>{
+  <span class="hljs-keyword">return</span> string.charAt(<span class="hljs-number">0</span>).toUpperCase() + string.slice(<span class="hljs-number">1</span>);
+}</div></div></div><div class="segment"><div class="comments doc-section doc-section-private"><div class="wrapper"><p><span class='doc-section-header'>Private method addUnderscores</span></p>
+<p>Adds underscores to a camelCased string.</p>
+<p>Parameters:</p>
+<ul>
+<li><p><strong>name must be a String.</strong></p>
+</li>
+<li><p><strong>indexes must be an Array.</strong></p>
+</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addUnderscores</span><span class="hljs-params">(name, indexes)</span></span>{
+  <span class="hljs-keyword">var</span> underscored = <span class="hljs-string">""</span>;
+  <span class="hljs-keyword">if</span> (indexes.length){
+    underscored = (name.substr(indexes[indexes.length-<span class="hljs-number">1</span>], name.length)).toLowerCase();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = indexes.length-<span class="hljs-number">1</span>; j &gt; <span class="hljs-number">0</span>; j -= <span class="hljs-number">1</span>){
+      <span class="hljs-keyword">var</span> temp = name.substr(indexes[j-<span class="hljs-number">1</span>], (indexes[j] - indexes[j-<span class="hljs-number">1</span>]));
+      underscored = temp.toLowerCase() + <span class="hljs-string">"_"</span> + underscored;
+    }
+    underscored = (name.substr(<span class="hljs-number">0</span>, indexes[<span class="hljs-number">0</span>])).toLowerCase() + <span class="hljs-string">"_"</span> + underscored;
+    <span class="hljs-keyword">return</span> underscored;
+  }<span class="hljs-keyword">else</span>{
+    <span class="hljs-keyword">return</span> name;
+  }
+}
+
+<span class="hljs-keyword">var</span> camelCase = {</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method underscoreToCamelCase</span></p>
+<p>Transforms an underscored string into a camelCased string.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>name must be a String.</strong></li>
+</ul></div></div><div class="code"><div class="wrapper">  underscoreToCamelCase: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(name)</span></span>{
+    <span class="hljs-comment">//console.log("received: ", name);</span>
+    <span class="hljs-keyword">var</span> subStringArray = name.split(<span class="hljs-string">"_"</span>),
+      camelCasedName = <span class="hljs-string">""</span>;
+    <span class="hljs-keyword">if</span> (subStringArray.length){
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt; subStringArray.length; i += <span class="hljs-number">1</span>){
+        subStringArray[i] = capitaliseFirstLetter(subStringArray[i]);
+      }
+      camelCasedName = subStringArray.join(<span class="hljs-string">""</span>);
+      <span class="hljs-comment">//console.log(camelCasedName);</span>
+      <span class="hljs-keyword">return</span> camelCasedName;
+    }<span class="hljs-keyword">else</span>{
+      <span class="hljs-keyword">return</span> name;
+    }
+  },</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method camelCaseToUnderscore</span></p>
+<p>Transforms a camelCased string into an underscored string.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>name must be a String.</strong></li>
+</ul></div></div><div class="code"><div class="wrapper">  camelCaseToUnderscore: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(name)</span></span>{
+    <span class="hljs-keyword">var</span> indexes = [];
+
+    <span class="hljs-comment">//console.log("received cc: ", name);</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; name.length; i += <span class="hljs-number">1</span>){
+      <span class="hljs-keyword">if</span> (name[i] === name[i].toUpperCase()){
+        indexes[indexes.length] = i;
+      }
+    }
+    <span class="hljs-keyword">return</span> addUnderscores(name, indexes);
+  },</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method camelCaseFields</span></p>
+<p>Transforms the keys of an Object from underscored strings into camelCased strings.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>model must be an Object.</strong></li>
+</ul></div></div><div class="code"><div class="wrapper">  camelCaseFields: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(model)</span></span>{
+    <span class="hljs-keyword">var</span> newModel = {};
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> model){
+      <span class="hljs-keyword">if</span> (model.hasOwnProperty(key)){
+        <span class="hljs-comment">//camelCasedCriteria[camelCaseUtil.camelCaseToUnderscore(criterion)] = criteria[criterion];</span>
+        newModel[<span class="hljs-keyword">this</span>.underscoreToCamelCase(key)] = model[key];
+      }
+    }
+    <span class="hljs-keyword">return</span> newModel;
+  },</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method underscoreFields</span></p>
+<p>Transforms the keys of an Object from camelCased strings into underscored strings.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>model must be an Object.</strong></li>
+</ul></div></div><div class="code"><div class="wrapper">  underscoreFields: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(model)</span></span>{
+    <span class="hljs-keyword">var</span> newModel = {};
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> model){
+      <span class="hljs-keyword">if</span> (model.hasOwnProperty(key)){
+        newModel[<span class="hljs-keyword">this</span>.camelCaseToUnderscore(key)] = model[key];
+      }
+    }
+    <span class="hljs-keyword">return</span> newModel;
+  },</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method camelCaseArray</span></p>
+<p>Camel cases all the keys in an array of objects.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>collection must be an Array.</strong><br/>(Must contain javascript objects.)</li>
+</ul>
+<p><strong>Returns an Array</strong></p></div></div><div class="code"><div class="wrapper">  camelCaseArray: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(collection)</span></span>{
+    <span class="hljs-keyword">var</span> tempCollection = [],
+      _this = <span class="hljs-keyword">this</span>;
+    _.each(collection, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(item)</span></span>{
+      tempCollection[tempCollection.length] = _this.camelCaseFields(item);
+    });
+    <span class="hljs-keyword">return</span> tempCollection;
+  },</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method underscoreArray</span></p>
+<p>Underscores all the keys in an array of objects.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>collection must be an Array.</strong></li>
+</ul>
+<p><strong>Returns an Array</strong></p></div></div><div class="code"><div class="wrapper">  underscoreArray: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(collection)</span></span>{
+    <span class="hljs-keyword">var</span> tempCollection = [],
+      _this = <span class="hljs-keyword">this</span>;
+    _.each(collection, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(item)</span></span>{
+      tempCollection[tempCollection.length] = _this.underscoreFields(item);
+    });
+    <span class="hljs-keyword">return</span> tempCollection;
+  }
+};
+
+<span class="hljs-built_in">module</span>.exports = camelCase;</div></div></div></div></body></html>

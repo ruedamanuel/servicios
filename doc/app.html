@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><title>app</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="app"><meta name="groc-project-path" content="app.js"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path">app.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="app-server">App Server</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+
+<span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">"express"</span>),
+	fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">"fs"</span>),
+  app = express(),
+	env = !!process.env.APP_ENV ? process.env.APP_ENV : <span class="hljs-string">"default"</span>,
+	config = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./config/"</span> + env),
+	redis = <span class="hljs-built_in">require</span>(<span class="hljs-string">"redis"</span>),
+  server = config.isHttps ? <span class="hljs-built_in">require</span>(<span class="hljs-string">"https"</span>) : <span class="hljs-built_in">require</span>(<span class="hljs-string">"http"</span>),
+  credentials = {},
+	session = <span class="hljs-built_in">require</span>(<span class="hljs-string">"express-session"</span>),
+	RedisStore = <span class="hljs-built_in">require</span>(<span class="hljs-string">"connect-redis"</span>)(session),
+	RedisClient = redis.createClient(
+		config.redis.port, 
+		config.redis.host, 
+		config.redis.options
+		),
+	sessionOptions = config.session;
+global.config = config;
+global.environment = env;
+
+<span class="hljs-keyword">if</span>(config.isHttps){
+  credentials.key = fs.readFileSync(config.credentials.keyPath, <span class="hljs-string">"utf8"</span>);
+  credentials.cert = fs.readFileSync(config.credentials.certPath, <span class="hljs-string">"utf8"</span>);
+}
+
+<span class="hljs-keyword">var</span> log = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./lib/server/utils/logger"</span>);</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>Below are all available log levels when requiring the logger utility:</p>
+<p>Example:</p>
+<pre><code>log.debug(&quot;Testing winston logger&quot;);
+log.info(&quot;Testing winston logger&quot;);
+log.warn(&quot;Testing winston logger&quot;);
+log.error(&quot;Testing winston logger&quot;);</code></pre></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Create a redis store for app sessions.</p></div></div><div class="code"><div class="wrapper">sessionOptions.store = <span class="hljs-keyword">new</span> RedisStore({
+		client: RedisClient,
+		prefix: config.redis.sessionPrefix
+		});</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Initialize MySQL</p></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./lib/server/services/mysql"</span>);
+mysql.init(config.mysql);</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p>Sample MySQL query using the proprietary service:</p>
+<p>Example:</p>
+<pre><code>mysql.query(&quot;SELECT * FROM profession WHERE id &gt; ?&quot;, [5])
+  .then(function(result){
+    log.info(&quot;it works: &quot;, result);
+  })
+  .catch(function(e){
+    log.error(&quot;Failed: &quot;, e);
+  });</code></pre></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Set Jade as default view template engine.</p></div></div><div class="code"><div class="wrapper">app.set(<span class="hljs-string">"views"</span>, <span class="hljs-string">"./lib/server/views"</span>);
+app.set(<span class="hljs-string">"view engine"</span>, <span class="hljs-string">"jade"</span>);
+app.engine(<span class="hljs-string">"jade"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"jade"</span>).__express);</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Set default path for static files.</p></div></div><div class="code"><div class="wrapper"> app.use(<span class="hljs-string">"/static"</span>, express.static(__dirname + <span class="hljs-string">'/static'</span>));</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Tell the app to use your session configuration.</p></div></div><div class="code"><div class="wrapper">app.use(session(sessionOptions));</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Set event listeners for Redis to monitor it&#39;s state.</p></div></div><div class="code"><div class="wrapper">RedisClient.on(<span class="hljs-string">"ready"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+	log.info(<span class="hljs-string">"Connection to Redis established on port "</span> + config.redis.port);
+	app.set(<span class="hljs-string">"redisStatus"</span>, <span class="hljs-string">"Connected"</span>);
+});
+RedisClient.on(<span class="hljs-string">"error"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+	log.error(<span class="hljs-string">"Unable to establish connection with Redis"</span>);
+	app.set(<span class="hljs-string">"redisStatus"</span>, <span class="hljs-string">"Disconnected"</span>);
+});
+RedisClient.on(<span class="hljs-string">"end"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+	log.warn(<span class="hljs-string">"Connection with Redis was terminated"</span>);
+	app.set(<span class="hljs-string">"redisStatus"</span>, <span class="hljs-string">"Disconnected"</span>);
+});</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Require the url map to process user requests.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-built_in">require</span>(<span class="hljs-string">"./lib/server/routes/urlMap"</span>)(app);</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Set the app to listen for requests in the port set in the selected configuration.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">var</span> serverInstance = config.isHttps ? server.createServer(credentials, app) : server.createServer(app);
+
+serverInstance.listen(config.server.port, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+	log.info(<span class="hljs-string">"Server listening on port "</span> + config.server.port);
+});</div></div></div></div></body></html>

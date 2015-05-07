@@ -17,17 +17,36 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         "projectPath": "README.md",
         "targetPath": "index",
         "pageTitle": "index",
+        "title": "index"
+      },
+      "depth": 1
+    }, {
+      "type": "file",
+      "data": {
+        "language": {
+          "nameMatchers": [".js"],
+          "pygmentsLexer": "javascript",
+          "multiLineComment": ["/*", "*", "*/"],
+          "singleLineComment": ["//"],
+          "ignorePrefix": "}",
+          "foldPrefix": "^",
+          "name": "JavaScript"
+        },
+        "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/app.js",
+        "projectPath": "app.js",
+        "targetPath": "app",
+        "pageTitle": "app",
         "firstHeader": {
           "type": "heading",
           "data": {
             "level": 1,
-            "title": "Servicios",
-            "slug": "servicios",
+            "title": "App Server",
+            "slug": "app-server",
             "isFileHeader": true
           },
           "depth": 1
         },
-        "title": "Servicios"
+        "title": "App Server"
       },
       "depth": 1,
       "outline": []
@@ -47,20 +66,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         "projectPath": "lib/client/scripts/client.js",
         "targetPath": "client",
         "pageTitle": "client",
-        "firstHeader": {
-          "type": "heading",
-          "data": {
-            "level": 1,
-            "title": "Client JS Index",
-            "slug": "client-js-index",
-            "isFileHeader": true
-          },
-          "depth": 1
-        },
-        "title": "Client JS Index"
+        "title": "client"
       },
-      "depth": 1,
-      "outline": []
+      "depth": 1
     }, {
       "type": "folder",
       "data": {
@@ -85,20 +93,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "projectPath": "lib/client/scripts/controllers/footer.js",
             "targetPath": "controllers/footer",
             "pageTitle": "controllers/footer",
-            "firstHeader": {
-              "type": "heading",
-              "data": {
-                "level": 1,
-                "title": "Client Footer Controller",
-                "slug": "client-footer-controller",
-                "isFileHeader": true
-              },
-              "depth": 1
-            },
-            "title": "Client Footer Controller"
+            "title": "footer"
           },
-          "depth": 2,
-          "outline": []
+          "depth": 2
         }, {
           "type": "file",
           "data": {
@@ -115,20 +112,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "projectPath": "lib/client/scripts/controllers/header.js",
             "targetPath": "controllers/header",
             "pageTitle": "controllers/header",
-            "firstHeader": {
-              "type": "heading",
-              "data": {
-                "level": 1,
-                "title": "Header Controller",
-                "slug": "header-controller",
-                "isFileHeader": true
-              },
-              "depth": 1
-            },
-            "title": "Header Controller"
+            "title": "header"
           },
-          "depth": 2,
-          "outline": []
+          "depth": 2
         }, {
           "type": "file",
           "data": {
@@ -145,20 +131,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "projectPath": "lib/client/scripts/controllers/home.js",
             "targetPath": "controllers/home",
             "pageTitle": "controllers/home",
-            "firstHeader": {
-              "type": "heading",
-              "data": {
-                "level": 1,
-                "title": "Home Controller",
-                "slug": "home-controller",
-                "isFileHeader": true
-              },
-              "depth": 1
-            },
-            "title": "Home Controller"
+            "title": "home"
           },
-          "depth": 2,
-          "outline": []
+          "depth": 2
         }
       ]
     }, {
@@ -185,20 +160,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "projectPath": "lib/client/scripts/directives/index.js",
             "targetPath": "directives/index",
             "pageTitle": "directives/index",
-            "firstHeader": {
-              "type": "heading",
-              "data": {
-                "level": 1,
-                "title": "Directives Index",
-                "slug": "directives-index",
-                "isFileHeader": true
-              },
-              "depth": 1
-            },
-            "title": "Directives Index"
+            "title": "index"
           },
-          "depth": 2,
-          "outline": []
+          "depth": 2
         }, {
           "type": "file",
           "data": {
@@ -215,20 +179,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "projectPath": "lib/client/scripts/directives/sServiceSearch.js",
             "targetPath": "directives/sServiceSearch",
             "pageTitle": "directives/sServiceSearch",
-            "firstHeader": {
-              "type": "heading",
-              "data": {
-                "level": 1,
-                "title": "Service Search Directive",
-                "slug": "service-search-directive",
-                "isFileHeader": true
-              },
-              "depth": 1
-            },
-            "title": "Service Search Directive"
+            "title": "sServiceSearch"
           },
-          "depth": 2,
-          "outline": []
+          "depth": 2
         }
       ]
     }, {
@@ -255,20 +208,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "projectPath": "lib/client/scripts/filters/index.js",
             "targetPath": "filters/index",
             "pageTitle": "filters/index",
-            "firstHeader": {
-              "type": "heading",
-              "data": {
-                "level": 1,
-                "title": "Filters Index",
-                "slug": "filters-index",
-                "isFileHeader": true
-              },
-              "depth": 1
-            },
-            "title": "Filters Index"
+            "title": "index"
           },
-          "depth": 2,
-          "outline": []
+          "depth": 2
         }, {
           "type": "file",
           "data": {
@@ -285,20 +227,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "projectPath": "lib/client/scripts/filters/propsFilter.js",
             "targetPath": "filters/propsFilter",
             "pageTitle": "filters/propsFilter",
-            "firstHeader": {
-              "type": "heading",
-              "data": {
-                "level": 1,
-                "title": "Props Filter",
-                "slug": "props-filter",
-                "isFileHeader": true
-              },
-              "depth": 1
-            },
-            "title": "Props Filter"
+            "title": "propsFilter"
           },
-          "depth": 2,
-          "outline": []
+          "depth": 2
         }
       ]
     }, {
@@ -343,8 +274,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                     "pageTitle": "lib/client/less/main",
                     "title": "main"
                   },
-                  "depth": 4,
-                  "outline": []
+                  "depth": 4
                 }
               ]
             }
@@ -381,20 +311,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                     "projectPath": "lib/server/routes/home.js",
                     "targetPath": "lib/server/routes/home",
                     "pageTitle": "lib/server/routes/home",
-                    "firstHeader": {
-                      "type": "heading",
-                      "data": {
-                        "level": 1,
-                        "title": "Home Routes",
-                        "slug": "home-routes",
-                        "isFileHeader": true
-                      },
-                      "depth": 1
-                    },
-                    "title": "Home Routes"
+                    "title": "home"
                   },
-                  "depth": 4,
-                  "outline": []
+                  "depth": 4
                 }, {
                   "type": "file",
                   "data": {
@@ -411,20 +330,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                     "projectPath": "lib/server/routes/landing.js",
                     "targetPath": "lib/server/routes/landing",
                     "pageTitle": "lib/server/routes/landing",
-                    "firstHeader": {
-                      "type": "heading",
-                      "data": {
-                        "level": 1,
-                        "title": "Landing Routes",
-                        "slug": "landing-routes",
-                        "isFileHeader": true
-                      },
-                      "depth": 1
-                    },
-                    "title": "Landing Routes"
+                    "title": "landing"
                   },
-                  "depth": 4,
-                  "outline": []
+                  "depth": 4
                 }, {
                   "type": "file",
                   "data": {
@@ -441,17 +349,46 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                     "projectPath": "lib/server/routes/urlMap.js",
                     "targetPath": "lib/server/routes/urlMap",
                     "pageTitle": "lib/server/routes/urlMap",
+                    "title": "urlMap"
+                  },
+                  "depth": 4
+                }
+              ]
+            }, {
+              "type": "folder",
+              "data": {
+                "path": "lib/server/services",
+                "title": "services"
+              },
+              "depth": 3,
+              "children": [
+                {
+                  "type": "file",
+                  "data": {
+                    "language": {
+                      "nameMatchers": [".js"],
+                      "pygmentsLexer": "javascript",
+                      "multiLineComment": ["/*", "*", "*/"],
+                      "singleLineComment": ["//"],
+                      "ignorePrefix": "}",
+                      "foldPrefix": "^",
+                      "name": "JavaScript"
+                    },
+                    "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/server/services/mysql.js",
+                    "projectPath": "lib/server/services/mysql.js",
+                    "targetPath": "lib/server/services/mysql",
+                    "pageTitle": "lib/server/services/mysql",
                     "firstHeader": {
                       "type": "heading",
                       "data": {
                         "level": 1,
-                        "title": "URL Map",
-                        "slug": "url-map",
+                        "title": "MySQL Database Service",
+                        "slug": "mysql-database-service",
                         "isFileHeader": true
                       },
                       "depth": 1
                     },
-                    "title": "URL Map"
+                    "title": "MySQL Database Service"
                   },
                   "depth": 4,
                   "outline": []
@@ -477,24 +414,32 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "foldPrefix": "^",
                       "name": "JavaScript"
                     },
+                    "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/server/utils/formatter.js",
+                    "projectPath": "lib/server/utils/formatter.js",
+                    "targetPath": "lib/server/utils/formatter",
+                    "pageTitle": "lib/server/utils/formatter",
+                    "title": "formatter"
+                  },
+                  "depth": 4
+                }, {
+                  "type": "file",
+                  "data": {
+                    "language": {
+                      "nameMatchers": [".js"],
+                      "pygmentsLexer": "javascript",
+                      "multiLineComment": ["/*", "*", "*/"],
+                      "singleLineComment": ["//"],
+                      "ignorePrefix": "}",
+                      "foldPrefix": "^",
+                      "name": "JavaScript"
+                    },
                     "sourcePath": "/Users/manuelrueda/Documents/Servicios/servicios/lib/server/utils/logger.js",
                     "projectPath": "lib/server/utils/logger.js",
                     "targetPath": "lib/server/utils/logger",
                     "pageTitle": "lib/server/utils/logger",
-                    "firstHeader": {
-                      "type": "heading",
-                      "data": {
-                        "level": 1,
-                        "title": "Log Utility",
-                        "slug": "log-utility",
-                        "isFileHeader": true
-                      },
-                      "depth": 1
-                    },
-                    "title": "Log Utility"
+                    "title": "logger"
                   },
-                  "depth": 4,
-                  "outline": []
+                  "depth": 4
                 }
               ]
             }
@@ -525,20 +470,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "projectPath": "lib/client/scripts/router/index.js",
             "targetPath": "router/index",
             "pageTitle": "router/index",
-            "firstHeader": {
-              "type": "heading",
-              "data": {
-                "level": 1,
-                "title": "UI Router Index",
-                "slug": "ui-router-index",
-                "isFileHeader": true
-              },
-              "depth": 1
-            },
-            "title": "UI Router Index"
+            "title": "index"
           },
-          "depth": 2,
-          "outline": []
+          "depth": 2
         }
       ]
     }

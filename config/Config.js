@@ -74,6 +74,13 @@ var Config = function(){
     user: "root",
     password: ""
   };
+  /**
+   * API Parameters
+   */
+  this.api = {
+    path: "/api",
+    version: "1.0"
+  }
 };
 
  module.exports = Config;

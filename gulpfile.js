@@ -15,7 +15,8 @@ var gulp = require("gulp"),
  */
 var browserify = require("gulp-browserify"),
   mainBowerFiles = require("main-bower-files"),
-  uglify = require("gulp-uglify");
+  uglify = require("gulp-uglify"),
+  templateCache = require("gulp-angular-templatecache");
 
 /**
  * Style Dependencies
@@ -81,6 +82,13 @@ gulp.task("browserify-test", ["lint-test-client"], function() {
     .pipe(rename("client-test.js"))
     .pipe(gulp.dest("./static/test"));
 });
+gulp.task("build-template-cache", function () {
+  gulp.src('./lib/client/views/**/*.html')
+    .pipe(templateCache({standalone: true}))
+    .pipe(rename("templates.js"))
+    .pipe(gulp.dest("./static/js"))
+    .pipe(gulp.dest("./static/test"));
+});
 /**
  * Bower Tasks
  */
@@ -92,8 +100,13 @@ gulp.task("get-bower-files", function(){
 /**
  * Testing tasks
  */
-gulp.task("test-client", ["lint-test-client", "browserify-test"], function() {
+gulp.task("copy-client-test-index", function(){
   return gulp.src("./lib/test/client/index.html")
+    .pipe(rename("test-index.html"))
+    .pipe(gulp.dest("./static/test"));
+});
+gulp.task("test-client", ["copy-client-test-index", "lint-test-client", "browserify-test"], function() {
+  return gulp.src("./static/test/test-index.html")
     .pipe(mochaPhantomjs({reporter: "spec", dump:"./logs/test-client.log"}));
 });
 
@@ -149,7 +162,7 @@ gulp.task("watch", function() {
   gulp.watch("./lib/test/client/**/*.js", ["test-client"]);
   gulp.watch("./lib/server/**/*.js", ["lint-server", "test-server"]);
   gulp.watch("./lib/test/server/**/*.js", ["test-server"]);
-  gulp.watch("./lib/client/views/**/*.html", ["copy-views"]);
+  gulp.watch("./lib/client/views/**/*.html", ["copy-views", "build-template-cache"]);
 });
 
 gulp.task("uglify", ["browserify-client"], function() {
@@ -161,6 +174,6 @@ gulp.task("uglify", ["browserify-client"], function() {
 
 gulp.task("test", ["test-server", "test-client"]);
 
-gulp.task("build", ["get-bower-files", "lint-server", "uglify", "minify", "copy"]);
+gulp.task("build", ["get-bower-files", "lint-server", "uglify", "minify", "build-template-cache", "copy"]);
 
 gulp.task("default", ["test-server", "test-client", "build", "watch"]);

@@ -5,19 +5,21 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Mocha Test Runner -- Client</title>
-        <link rel="stylesheet" href="../../../node_modules/mocha/mocha.css">
+        <link rel="stylesheet" href="../../node_modules/mocha/mocha.css">
+        <script src="../vendor/jquery.js"></script>
     </head>
     <body>
     <div id="mocha"></div>
-    <script src="../../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/mocha/mocha.js"></script>
     <script>mocha.setup('bdd')</script>
-    <script src="../../../bower_components/angular/angular.js"></script>
-    <script src="../../../bower_components/angular-mocks/angular-mocks.js"></script>
-    <script src="../../../bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="../../../bower_components/ui-router/release/angular-ui-router.js"></script>
-    <script src="../../../bower_components/angular-ui-select/dist/select.js"></script>
-    <script src="../../../static/js/main.js"></script>
-    <script src="../../../static/test/client-test.js"></script>
+    <script src="../vendor/angular.js"></script>
+    <script src="../../bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="../vendor/angular-sanitize.js"></script>
+    <script src="../vendor/angular-ui-router.js"></script>
+    <script src="../vendor/select.js"></script>
+    <script src="../js/templates.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="./client-test.js"></script>
     <script>
         if (window.mochaPhantomJS) {
             mochaPhantomJS.run();

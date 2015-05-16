@@ -3,11 +3,57 @@
         <div class="col-xs-12 col-md-4">
             <section s-service-search></section>
         </div>
-        <h4 class="col-xs-12 col-md-8 search-results-header">{{profile.name}}</h4>
     </div>
     <section class="row">
-        <div class="col-xs-12">
-            <p>{{profile.address}}</p>
-        </div>
+        <article class="col-xs-12 profile-bg">
+            <div class="row" s-pull-down>
+                <div class="hidden-xs hidden-sm col-md-4">
+                    &nbsp;
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 profile-icon" s-pull-down>
+                    <img ng-src="/static/img/{{profile.icon}}" ng-attr-alt="{{profile.name}}"/>
+                </div>
+                <div class="col-xs-4 profile-name">
+                    <h4>{{profile.name}}</h4>
+                </div>
+            </div>
+        </article>
+        <article class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="row">
+                        <p>Dirección:<br>{{profile.address}}</p>
+                    </div>
+                    <div class="row">
+                        <p>Teléfonos:</p>
+                    </div>
+                    <div class="row" ng-repeat="t in profile.telephones">
+                        <p>{{t.type}}: {{t.number}}</p>
+                    </div>
+                    <div class="row">
+                        <p>Horario:</p>
+                    </div>
+                    <div class="row">
+                        <p>{{profile.schedule.openTime}} - {{profile.schedule.closeTime}}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 no-side-padding">
+                    <article class="profile-map-wrapper" s-map address="profile.address" city="profile.city" country="profile.country"></article>
+                </div>
+            </div>
+        </article>
+    </section>
+    <section class="row">
+        <article class="col-xs-12 col-md-6">
+            <p>Rating</p>
+        </article>
+        <article class="col-xs-12 col-md-6">
+            <p>Add to favorites | Review</p>
+        </article>
+    </section>
+    <section class="row">
+        <article class="col-xs-12">
+            <p>Reviews (in repeater)</p>
+        </article>
     </section>
 </div>

@@ -13,7 +13,7 @@
                 <div class="col-xs-4 col-sm-4 col-md-4 profile-icon" s-pull-down>
                     <img ng-src="/static/img/{{profile.icon}}" ng-attr-alt="{{profile.name}}"/>
                 </div>
-                <div class="col-xs-4 profile-name">
+                <div class="col-xs-4 profile-name" s-pull-down>
                     <h4>{{profile.name}}</h4>
                 </div>
             </div>
@@ -21,20 +21,94 @@
         <article class="col-xs-12">
             <div class="row">
                 <div class="col-xs-12 col-md-6">
-                    <div class="row">
+                    <!--<div class="row">
                         <p>Dirección:<br>{{profile.address}}</p>
                     </div>
                     <div class="row">
                         <p>Teléfonos:</p>
                     </div>
-                    <div class="row" ng-repeat="t in profile.telephones">
-                        <p>{{t.type}}: {{t.number}}</p>
+                    <div class="row">
+                        <p ng-repeat="t in profile.telephones">{{t.type}}: {{t.number}}</p>
                     </div>
                     <div class="row">
                         <p>Horario:</p>
                     </div>
                     <div class="row">
                         <p>{{profile.schedule.openTime}} - {{profile.schedule.closeTime}}</p>
+                    </div>-->
+                    <div class="row profile-basic-info">
+                        <article class="col-xs-12 col-md-6">
+                            <table class="row profile-address-table">
+                                <tr>
+                                    <th>Dirección</th>
+                                </tr>
+                                <tr>
+                                    <td>{{profile.address}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{profile.city}}, {{profile.state}}, {{profile.country}}</td>
+                                </tr>
+                            </table>
+                            <table class="row profile-phone-table">
+                                <tr>
+                                    <th>Teléfonos</th>
+                                </tr>
+                                <tr ng-repeat="t in profile.telephones">
+                                    <td>{{t.type}}</td>
+                                    <td>:</td>
+                                    <td>{{t.number}}</td>
+                                </tr>
+                            </table>
+                        </article>
+                        <article class="col-xs-12 col-md-6">
+                            <table class="row profile-schedule-table">
+                                <tr>
+                                    <th>Horario</th>
+                                </tr>
+                                <tr>
+                                    <td>Lunes</td>
+                                    <td>09:00:00</td>
+                                    <td> - </td>
+                                    <td>18:00:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Martes</td>
+                                    <td>09:00:00</td>
+                                    <td> - </td>
+                                    <td>18:00:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Miércoles</td>
+                                    <td>09:00:00</td>
+                                    <td> - </td>
+                                    <td>18:00:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Jueves</td>
+                                    <td>09:00:00</td>
+                                    <td> - </td>
+                                    <td>18:00:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Viernes</td>
+                                    <td>09:00:00</td>
+                                    <td> - </td>
+                                    <td>18:00:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Sábado</td>
+                                    <td>09:00:00</td>
+                                    <td> - </td>
+                                    <td>18:00:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Domingo</td>
+                                    <td>10:00:00</td>
+                                    <td> - </td>
+                                    <td>14:00:00</td>
+                                </tr>
+                            </table>
+                        </article>
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-6 no-side-padding">

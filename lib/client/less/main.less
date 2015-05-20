@@ -7,40 +7,40 @@
 @import "../bootstrap-3.3.1/less/bootstrap.less";
 @import "../bootstrap-3.3.1/less/theme.less";
 @import (inline) "../../../bower_components/angular-ui-select/dist/select.css";
+@import "./colors.less";
+@import "./mixins.less";
 
-//Mixins
-.cast-shadow{
-  box-shadow: 0 5px 10px #333333;
-}
-.sink-box{
-  border-top: 2px solid #666666;
-  border-left: 2px solid #666666;
-  border-right: 2px solid #EEEEEE;
-  border-bottom: 2px solid #EEEEEE;
-}
 
 body.container-fluid{
   padding-left: 0;
   padding-right: 0;
+  color: @primary_text;
+}
+h1, h2, h3 {
+  color: @icons;
 }
 
 header{
   width: 100%;
-  background-color: #EEEEEE;
-  border-bottom: 1px solid #AAAAAA;
+  background-color: @primary;
+  border-bottom: 1px solid @dark_primary;
+  .gradient(@dark_primary, @primary);
+  .cast-shadow;
 }
 .main{
   width: 100%;
-  background-color: #FFFFFF;
+  background-color: @background;
   background-image: url("/static/img/grey_wash_wall.png");
   background-repeat: repeat;
-  border-top: 1px solid #666666;
-  border-bottom: 1px solid #666666;
+  //border-top: 1px solid @divider;
+  //border-bottom: 1px solid @divider;
 }
 footer{
   width: 100%;
-  background-color: #AAAAAA;
-  border-top: 1px solid #999999;
+  background-color: @accent;
+  border-top: 1px solid @dark_accent;
+  color: @icons;
+  .gradient(@accent, @dark_accent);
 }
 .header-wrapper{
   max-width: 1200px;
@@ -50,9 +50,9 @@ footer{
   max-width: 1200px;
   margin: 0 auto;
   padding-bottom: 1em;
-  background-color: #CCCCCC;
-  border-left: 2px solid #999999;
-  border-right: 2px solid #999999;
+  background-color: @background;
+  border-left: 2px solid @divider;
+  border-right: 2px solid @divider;
   .cast-shadow;
 }
 .footer-wrapper{
@@ -67,9 +67,9 @@ footer{
 }
 .shadow-box{
   margin: 1em 0;
-  border: 2px solid #EEEEEE;
+  border: 2px solid @divider;
   border-radius: 5px;
-  background-color: rgba(80, 80, 80, 0.6);
+  background-color: @accent_alpha;
   padding-bottom: 1em;
 }
 .no-side-padding{
@@ -97,8 +97,8 @@ footer{
   }
 }
 .pop-font{
-  color: #FFFFFF;
-  text-shadow: 1px 1px #333333;
+  color: @icons;
+  text-shadow: 1px 1px @primary_text;
 }
 
 /**
@@ -114,9 +114,10 @@ footer{
   margin-top: 5px;
 }
 .search-results-header{
-  color: #ffffff;
+  color: @primary_text;
 }
 .search-term{
+  color: @secondary_text;
   font-style: italic;
 }
 /**
@@ -126,9 +127,9 @@ footer{
   width: 100%;
   padding: 1em;
   margin: 1px 0;
-  border: 1px solid #999999;
+  border: 1px solid @accent;
   border-radius: 3px;
-  background-color: #FFFFFF;
+  background-color: @background;
   max-height: 5em;
   overflow: hidden;
 }
@@ -150,7 +151,7 @@ footer{
   margin-top: 5px;
   height: 200px;
   background: url("/static/img/small_steps.png") repeat;
-  .sink-box;
+  .sink-box(@light_divider, @accent);
 }
 
 .profile-icon {
@@ -163,9 +164,9 @@ footer{
   width: 100%;
   max-width: 50px;
   height: auto;
-  border: 2px solid #999999;
+  border: 2px solid @accent;
   border-radius: 4px;
-  background-color: #ffffff;
+  background-color: @background;
   .cast-shadow;
 }
 .profile-basic-info{
@@ -225,7 +226,7 @@ footer{
   min-height: 150px;
   margin: 2em 0 1em 0;
   //border: 2px solid #999999;
-  .sink-box;
+  .sink-box(@light_divider, @accent);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -244,7 +245,7 @@ footer{
     right: 0;
     z-index: 999;
     max-width: 200px;
-    border: 4px solid #999999;
+    border: 4px solid @accent;
     border-radius: 8px;
   }
   .profile-map-wrapper {

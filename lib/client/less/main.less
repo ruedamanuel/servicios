@@ -148,29 +148,49 @@ footer{
  * Provider Profile Styles
  */
 .profile-bg{
+  position: relative;
   margin-top: 5px;
   height: 200px;
   background: url("/static/img/small_steps.png") repeat;
   .sink-box(@light_divider, @accent);
 }
+.profile-bg-img-wrapper{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.profile-bg-img{
+  width: 100%;
+  height: auto;
+}
 
 .profile-icon {
   position: relative;
-  overflow: hidden;
+  //overflow: hidden;
   text-align: center;
   height: 60px;
 }
 .profile-icon img{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 999;
   width: 100%;
-  max-width: 50px;
+  max-width: 80px;
   height: auto;
   border: 2px solid @accent;
   border-radius: 4px;
   background-color: @background;
   .cast-shadow;
 }
+.profile-name{
+  background-color: @accent_alpha;
+  .pop-font;
+}
 .profile-basic-info{
-  padding: 1em;
+  padding: 2em 1em 1em 1em;
   line-height: 1.2em;
 }
 .profile-address-table{

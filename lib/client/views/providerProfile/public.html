@@ -6,14 +6,19 @@
     </div>
     <section class="row">
         <article class="col-xs-12 profile-bg">
+            <div class="profile-bg-img-wrapper">
+                <img class="profile-bg-img" ng-hide="profile.backgroundUri === 'small_steps.png'"
+                     ng-src="/static/img/{{profile.backgroundUri}}"
+                     ng-attr-alt="{{profile.name}} background" />
+            </div>
             <div class="row" s-pull-down>
                 <div class="hidden-xs hidden-sm col-md-4">
                     &nbsp;
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 profile-icon" s-pull-down>
-                    <img ng-src="/static/img/{{profile.icon}}" ng-attr-alt="{{profile.name}}"/>
+                    <img ng-src="/static/img/{{profile.iconUri}}" ng-attr-alt="{{profile.name}}"/>
                 </div>
-                <div class="col-xs-4 profile-name" s-pull-down>
+                <div class="col-xs-8 col-md-4 profile-name" s-pull-down>
                     <h4>{{profile.name}}</h4>
                 </div>
             </div>

@@ -124,15 +124,13 @@
     </section>
     <section class="row">
         <article class="col-xs-12 col-md-6">
-            <p>Rating</p>
+            <p>Calificación promedio: {{profile.rating/2 | number: 0}}</p>
         </article>
         <article class="col-xs-12 col-md-6">
-            <p>Add to favorites | Review</p>
+            <p>Agregar a favoritos | Evaluar Servicio</p>
         </article>
     </section>
     <section class="row">
-        <article class="col-xs-12">
-            <p>Reviews (in repeater)</p>
-        </article>
+        <article ng-repeat="r in reviews" s-review review="r"></article>
     </section>
 </div>

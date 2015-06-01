@@ -22,6 +22,9 @@ body.container-fluid{
 h1, h2, h3 {
   color: @icons;
 }
+hr{
+  border-color: @divider;
+}
 
 header{
   width: 100%;
@@ -29,6 +32,9 @@ header{
   border-bottom: 1px solid @dark_primary;
   .gradient(@dark_primary, @primary);
   .cast-shadow;
+}
+table, tbody, th, tr, td {
+  width: 100%;
 }
 .main{
   width: 100%;
@@ -281,5 +287,58 @@ footer{
   .profile-icon img{
     max-width: 200px;
   }
+}
+
+/**
+ * Votes
+ */
+.votes-slot{
+  padding: 1em;
+}
+.votes-wrapper {
+  width: 100%;
+  padding: 1em;
+}
+//.votes-arrow-wrapper {
+//  height: 50px;
+//  width: 80px;
+//}
+.votes-tally h2{
+  color: @secondary_text;
+  text-align: center;
+  margin-left: 0.8em;
+  margin-top: 10px;
+}
+
+.votes-arrow-size{
+  width: 100%;
+  max-width: 25px;
+  height: 100%;
+  max-height: 25px;
+  padding: 0;
+  text-align: center;
+}
+.votes-arrow-wrapper{
+  .votes-arrow-size;
+  margin: 0 auto;
+}
+.votes-arrow-up {
+  .votes-arrow-size;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 25px solid @primary;
+}
+.votes-arrow-down {
+  .votes-arrow-size;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 25px solid @primary;
+}
+
+.votes-arrow-up:hover{
+  border-bottom: 25px solid @highlight;
+}
+.votes-arrow-down:hover{
+  border-top: 25px solid @highlight;
 }
 

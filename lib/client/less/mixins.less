@@ -1,16 +1,12 @@
 //Custom mixins for the project css
 .gradient (@startColor: #eee, @endColor: white) {
   background-color: @startColor;
-  background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
-  background: -webkit-linear-gradient(top, @startColor, @endColor);
-  background: -moz-linear-gradient(top, @startColor, @endColor);
-  background: -ms-linear-gradient(top, @startColor, @endColor);
-  background: -o-linear-gradient(top, @startColor, @endColor);
+  background-image: linear-gradient(to bottom, @startColor, @endColor);
 }
 .cast-shadow{
   box-shadow: 0 5px 10px @primary_text;
 }
-.sink-box (@lightColor: #eee, @darkColor: #666){
+.sink-box (@lightColor: #eee, @darkColor: #aaa){
   border-top: 2px solid @darkColor;
   border-left: 2px solid @darkColor;
   border-right: 2px solid @lightColor;

@@ -124,7 +124,10 @@ gulp.task("test-server", ["lint-test-server"], function() {
 gulp.task("styles", function() {
   return gulp.src("./lib/client/less/main.less")
     .pipe(less())
-    .pipe(prefix({ cascade: true }))
+    .pipe(prefix({
+      browsers: "> 1%",
+      cascade: false
+    }))
     .pipe(rename("main.css"))
     .pipe(gulp.dest("./static/css"));
 });

@@ -81,6 +81,23 @@ var Config = function(){
     path: "/api",
     version: "1.0"
   }
+
+  /**
+   * OAuth Parameters
+   */
+  this.oauth = {
+    facebook: {
+      apiKey: "ENTER API KEY",
+      secret: "ENTER SECRET",
+      redirectUri: "https://localhost:3443/oauth/facebook/redirect",
+      scope: ["email"]
+    },
+    google: {
+      apiKey: "ENTER API KEY",
+      secret: "ENTER SECRET",
+      redirectUri: "https://localhost:3443/oauth/google/redirect"
+    }
+  }
 };
 
  module.exports = Config;

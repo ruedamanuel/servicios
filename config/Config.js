@@ -95,7 +95,8 @@ var Config = function(){
     google: {
       apiKey: "ENTER API KEY",
       secret: "ENTER SECRET",
-      redirectUri: "https://localhost:3443/oauth/google/redirect"
+      redirectUri: "https://localhost:3443/oauth/google/redirect",
+      scope: ["profile", "email"]
     }
   }
 };

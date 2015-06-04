@@ -28,7 +28,7 @@
   "unused"        : true,     // Warns of variables that are defined and never used.
   "strict"        : true,     // Require `use strict` pragma in every file.
   "trailing"      : true,     // Prohibit trailing whitespaces.
-  "maxparams"     : 4,        // Set the max number of formal parameters allowed per function.
+  "maxparams"     : 8,        // Set the max number of formal parameters allowed per function.
   "maxdepth"      : 3,        // Set the max number of block nesting levels.
   "maxstatements" : 100,       // Set the max number of statements allowed per function.
   "maxcomplexity" : 5,        // Set the max cyclomatic complexity value.

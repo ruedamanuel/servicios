@@ -42,25 +42,25 @@ var mochaPhantomjs = require("gulp-mocha-phantomjs"),
 gulp.task("lint-client", function() {
   return gulp.src("./lib/client/scripts/**/*.js")
     .pipe(jshint())
-    .pipe(jshint.reporter("default"));
+    .pipe(jshint.reporter("default", {verbose: true}));
 });
 
 gulp.task("lint-test-client", function() {
   return gulp.src("./lib/test/client/**/*.js")
     .pipe(jshint())
-    .pipe(jshint.reporter("default"));
+    .pipe(jshint.reporter("default", {verbose: true}));
 });
 
 gulp.task("lint-server", function() {
   return gulp.src("./lib/server/**/*.js")
     .pipe(jshint())
-    .pipe(jshint.reporter("default"));
+    .pipe(jshint.reporter("default", {verbose: true}));
 });
 
 gulp.task("lint-test-server", function() {
   return gulp.src("./lib/test/server/**/*.js")
     .pipe(jshint())
-    .pipe(jshint.reporter("default"));
+    .pipe(jshint.reporter("default", {verbose: true}));
 });
 /**
  * Browserify tasks

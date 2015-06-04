@@ -9,6 +9,8 @@
 @import (inline) "../../../bower_components/angular-ui-select/dist/select.css";
 @import "./colors.less";
 @import "./mixins.less";
+@import "./modal.less";
+@import "./specialButtons.less";
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
@@ -141,6 +143,11 @@ footer{
   background-color: @background;
   max-height: 5em;
   overflow: hidden;
+  cursor: pointer;
+}
+.provider-card-wrapper:hover {
+  .pop-font;
+  color: @secondary_text;
 }
 
 .provider-card-image{

@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.12.4",
     "connect-redis": "^2.1.0",
     "express": "4.8.7",
     "express-session": "^1.9.2",

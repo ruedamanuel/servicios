@@ -5,6 +5,7 @@
 "use strict";
 
 var express = require("express"),
+  bodyParser = require("body-parser"),
 	fs = require("fs"),
   app = express(),
 	env = !!process.env.APP_ENV ? process.env.APP_ENV : "default",
@@ -82,6 +83,11 @@ app.engine("jade", require("jade").__express);
  * Tell the app to use your session configuration.
  */
 app.use(session(sessionOptions));
+
+/**
+ * Tell app to parse post bodies as json
+ */
+app.use(bodyParser.json());
 
 /**
  * Set event listeners for Redis to monitor it's state.

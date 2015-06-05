@@ -80,7 +80,7 @@ var Config = function(){
   this.api = {
     path: "/api",
     version: "1.0"
-  }
+  };
 
   /**
    * OAuth Parameters
@@ -98,7 +98,7 @@ var Config = function(){
       redirectUri: "https://localhost:3443/oauth/google/redirect",
       scope: ["profile", "email"]
     }
-  }
+  };
 };
 
  module.exports = Config;

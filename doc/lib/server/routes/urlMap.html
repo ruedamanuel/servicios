@@ -2,7 +2,8 @@
 "use strict"</span>;
 
 <span class="hljs-keyword">var</span> log = <span class="hljs-built_in">require</span>(<span class="hljs-string">"../utils/logger"</span>),
-  color = <span class="hljs-built_in">require</span>(<span class="hljs-string">"cli-color"</span>);
+  color = <span class="hljs-built_in">require</span>(<span class="hljs-string">"cli-color"</span>),
+  apiPath = global.config.api.path + <span class="hljs-string">"/"</span> + global.config.api.version;
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(app)</span></span>{
   <span class="hljs-comment">//General log filter</span>
@@ -12,6 +13,27 @@
     color.blackBright(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toString()));
     next();
   });
+
+  <span class="hljs-comment">//Force JSON format to be default for all API routes</span>
+  app.all(global.config.api.path + <span class="hljs-string">"/*"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res, next)</span></span>{
+    res.type(<span class="hljs-string">"json"</span>);
+    next();
+  });
+
+  <span class="hljs-comment">//OAuth Routes</span>
+  app.get(<span class="hljs-string">"/oauth/:oauthProvider/login"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./oauth"</span>).login);
+  app.get(<span class="hljs-string">"/oauth/:oauthProvider/redirect"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./oauth"</span>).redirect);
+
+  <span class="hljs-comment">//API routes</span>
+  app.get(apiPath + <span class="hljs-string">"/profession"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./api1.0/profession"</span>).get);
+
+  app.get(apiPath + <span class="hljs-string">"/providers/:profession"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./api1.0/providers"</span>).getByProfession);
+  app.get(apiPath + <span class="hljs-string">"/providers/get/:alias"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./api1.0/providers"</span>).getByAlias);
+
+  app.get(apiPath + <span class="hljs-string">"/review/provider"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./api1.0/review"</span>).getByProvider);
+
+  <span class="hljs-comment">//TESTING ROUTE</span>
+  app.post(apiPath + <span class="hljs-string">"/register"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./api1.0/register"</span>).registerUser);
 
   <span class="hljs-comment">//Root</span>
   app.get(<span class="hljs-string">"/"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./home"</span>).get);

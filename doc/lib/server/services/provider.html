@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en"><head><title>lib/server/services/provider</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="lib/server/services/provider"><meta name="groc-project-path" content="lib/server/services/provider.js"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/server/services/provider.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="provider-service">Provider Service</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+
+<span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./mysql"</span>);
+
+<span class="hljs-built_in">module</span>.exports = {</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method Provider.getByProfession</span></p>
+<p>Returns all service providers that perform a given profession.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>req must be a HttpRequest.</strong></li>
+</ul>
+<p><strong>Returns a Promise</strong></p></div></div><div class="code"><div class="wrapper">  getByProfession: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req)</span></span>{
+    <span class="hljs-keyword">var</span> query = [
+      <span class="hljs-string">"SELECT `prov`.*, `i`.`uri` AS icon_uri, `bg`.`uri` AS background_uri FROM profession AS p"</span>,
+      <span class="hljs-string">"JOIN service_provider_profession AS spp ON p.`id` = spp.`profession_id`"</span>,
+      <span class="hljs-string">"JOIN service_provider AS prov ON spp.`service_provider_id` = prov.`id`"</span>,
+      <span class="hljs-string">"JOIN images AS i ON prov.`img_icon` = i.`id`"</span>,
+      <span class="hljs-string">"JOIN images AS bg ON prov.`img_bg` = bg.`id`"</span>,
+      <span class="hljs-string">"WHERE p.name = ?"</span>
+    ];
+    <span class="hljs-keyword">return</span> mysql.query(query.join(<span class="hljs-string">" "</span>), [req.params.profession]);
+  },</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method Provider.getByAlias</span></p>
+<p>Retrieves all the info that relates to a provider through
+the alias in the http request.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>req must be a HttpRequest.</strong></li>
+</ul>
+<p><strong>Returns a Promise</strong></p></div></div><div class="code"><div class="wrapper">  getByAlias: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req)</span></span>{
+    <span class="hljs-keyword">var</span> query = [
+      <span class="hljs-string">"SELECT `prov`.*, `i`.`uri` AS icon_uri, `bg`.`uri` AS background_uri, AVG(`r`.`rating`) AS rating,"</span>,
+      <span class="hljs-string">"COUNT(DISTINCT `r`.`id`) AS total_reviews FROM profession AS p"</span>,
+      <span class="hljs-string">"JOIN service_provider_profession AS spp ON p.`id` = spp.`profession_id`"</span>,
+      <span class="hljs-string">"JOIN service_provider AS prov ON spp.`service_provider_id` = prov.`id`"</span>,
+      <span class="hljs-string">"JOIN images AS i ON prov.`img_icon` = i.`id`"</span>,
+      <span class="hljs-string">"JOIN images AS bg ON prov.`img_bg` = bg.`id`"</span>,
+      <span class="hljs-string">"JOIN review AS r ON prov.`id` = r.`service_provider_id`"</span>,
+      <span class="hljs-string">"WHERE `prov`.`alias` = ?"</span>
+    ];
+    <span class="hljs-keyword">return</span> mysql.query(query.join(<span class="hljs-string">" "</span>), [req.params.alias]);
+  }
+};</div></div></div></div></body></html>

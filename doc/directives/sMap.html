@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en"><head><title>directives/sMap</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="directives/sMap"><meta name="groc-project-path" content="lib/client/scripts/directives/sMap.js"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/client/scripts/directives/sMap.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="google-map-embedding-directive">Google Map Embedding directive</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+<span class="hljs-keyword">var</span> angular = <span class="hljs-built_in">window</span>.angular;
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($templateCache, $sce, $window)</span></span>{
+  <span class="hljs-keyword">return</span> {
+    restrict: <span class="hljs-string">"A"</span>,
+    template: $templateCache.get(<span class="hljs-string">"directives/sMap.html"</span>),
+    scope: {
+      address: <span class="hljs-string">"="</span>,
+      city: <span class="hljs-string">"="</span>,
+      country: <span class="hljs-string">"="</span>
+    },
+    link: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(scope, element)</span></span>{
+      scope.apiKey = <span class="hljs-string">"AIzaSyD5RoNgkibbYXCFhCRGP-r606ikqALI5RE"</span>;
+      scope.location = scope.address + <span class="hljs-string">", "</span> + scope.city + <span class="hljs-string">", "</span> + scope.country;
+      scope.locationEscaped = scope.location.replace(<span class="hljs-regexp">/\s/g</span>, <span class="hljs-string">"+"</span>);
+      scope.setDimensions = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+        scope.width = element.parent().width();
+        scope.height = element.parent().height();
+      };
+      angular.element($<span class="hljs-built_in">window</span>).bind(<span class="hljs-string">"resize"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+        scope.setDimensions();
+        scope.$digest();
+      });
+      scope.setDimensions();
+      <span class="hljs-comment">//scope.url = $sce.trustAsResourceUrl(</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p> &quot;<a href="https://www.google.com/maps/embed/v1/place?key=">https://www.google.com/maps/embed/v1/place?key=</a>&quot; + scope.apiKey + &quot;&amp;q=&quot; + scope.locationEscaped</p></div></div><div class="code"><div class="wrapper">      <span class="hljs-comment">//);</span>
+      scope.url = $sce.trustAsResourceUrl(
+        <span class="hljs-string">"https://www.google.com/maps/embed/v1/place?key="</span> + scope.apiKey +
+        <span class="hljs-string">"&amp;q=Calle+71+%23+1-90,+Bogotá,+Cundinamarca,+Colombia"</span>
+      );
+    }
+  };
+};</div></div></div></div></body></html>

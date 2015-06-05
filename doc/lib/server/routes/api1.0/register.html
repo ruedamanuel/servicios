@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="en"><head><title>lib/server/routes/api1.0/register</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../../"><meta name="groc-document-path" content="lib/server/routes/api1.0/register"><meta name="groc-project-path" content="lib/server/routes/api1.0/register.js"><link rel="stylesheet" type="text/css" media="all" href="../../../../assets/style.css"><script type="text/javascript" src="../../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/server/routes/api1.0/register.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="registration-routes">Registration Routes</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+
+<span class="hljs-keyword">var</span> register = <span class="hljs-built_in">require</span>(<span class="hljs-string">"../../services/registration"</span>),
+  log = <span class="hljs-built_in">require</span>(<span class="hljs-string">"../../utils/logger"</span>);
+
+<span class="hljs-built_in">module</span>.exports = {
+  registerUser: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span></span>{
+    log.info(req.body);
+    register.register(req)
+      .then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(user)</span></span>{
+        log.info(user);
+        res.status(<span class="hljs-number">201</span>).send(user);
+      })
+      .catch(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error)</span></span>{
+        log.error(error.message);
+        res.status(<span class="hljs-number">500</span>).send(error.message);
+      });
+  }
+};</div></div></div></div></body></html>

@@ -4,6 +4,12 @@
 
 <span class="hljs-built_in">module</span>.exports = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
   <span class="hljs-keyword">var</span> angular = <span class="hljs-built_in">window</span>.angular;
-  angular.module(<span class="hljs-string">"sDirectives"</span>, [])
-    .directive(<span class="hljs-string">"sServiceSearch"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./sServiceSearch"</span>));
+  angular.module(<span class="hljs-string">"sDirectives"</span>, [<span class="hljs-string">"sFactories"</span>, <span class="hljs-string">"ui.select"</span>])
+    .directive(<span class="hljs-string">"sServiceSearch"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./sServiceSearch"</span>))
+    .directive(<span class="hljs-string">"sProviderCard"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./sProviderCard"</span>))
+    .directive(<span class="hljs-string">"sPullDown"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./sPullDown"</span>))
+    .directive(<span class="hljs-string">"sMap"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./sMap"</span>))
+    .directive(<span class="hljs-string">"sVotes"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./sVotes"</span>))
+    .directive(<span class="hljs-string">"sReview"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./sReview"</span>))
+    .directive(<span class="hljs-string">"sModalWindow"</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">"./sModalWindow"</span>));
 })();</div></div></div></div></body></html>

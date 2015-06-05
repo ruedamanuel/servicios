@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="en"><head><title>lib/server/services/user</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="lib/server/services/user"><meta name="groc-project-path" content="lib/server/services/user.js"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/server/services/user.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="user-service">User Service</h1>
+<p>Handles all data i/o related to users.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+
+<span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./mysql"</span>);
+
+<span class="hljs-built_in">module</span>.exports = {
+  findByEmail: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(email)</span></span>{
+    <span class="hljs-keyword">var</span> query = [
+      <span class="hljs-string">"SELECT u.* FROM user AS u JOIN email AS e ON e.user_id = u.id"</span>,
+      <span class="hljs-string">"WHERE e.email = ?"</span>
+    ];
+    <span class="hljs-keyword">return</span> mysql.query(query.join(<span class="hljs-string">" "</span>), [email]);
+  },
+  findById: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(id)</span></span>{
+    <span class="hljs-keyword">var</span> query = [
+      <span class="hljs-string">"SELECT * FROM user WHERE id = ?"</span>
+    ];
+    <span class="hljs-keyword">return</span> mysql.query(query.join(<span class="hljs-string">" "</span>), [id]);
+  }
+};</div></div></div></div></body></html>

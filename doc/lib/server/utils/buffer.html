@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="en"><head><title>lib/server/utils/buffer</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="lib/server/utils/buffer"><meta name="groc-project-path" content="lib/server/utils/buffer.js"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/server/utils/buffer.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="buffer-utility">Buffer Utility</h1>
+<p>Used to collect chunked responses from http
+requests and return formatter responses.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">"lodash"</span>),
+  format = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./formatter"</span>);
+
+<span class="hljs-built_in">module</span>.exports = {</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method Buffer.parseUri</span></p>
+<p>Retrieves the query parameters from a uri and
+parses them as a json object.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>uri must be a String.</strong></li>
+</ul>
+<p><strong>Returns a *</strong></p></div></div><div class="code"><div class="wrapper">  parseUri: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(uri)</span></span>{
+    <span class="hljs-keyword">var</span> items = uri.split(<span class="hljs-string">"&amp;"</span>),
+      json = {};
+    _.each(items, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(item)</span></span>{
+      <span class="hljs-keyword">var</span> temp = item.split(<span class="hljs-string">"="</span>);
+      <span class="hljs-comment">//console.log(temp);</span>
+      <span class="hljs-keyword">if</span> (temp.length === <span class="hljs-number">2</span>){
+        json[temp[<span class="hljs-number">0</span>]] = temp[<span class="hljs-number">1</span>];
+      }
+    });
+    <span class="hljs-comment">//console.log(json);</span>
+    <span class="hljs-keyword">return</span> format.camelCaseFields(json);
+  },</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method Buffer.asJSON</span></p>
+<p>Transforms chunked data into a json object.</p>
+<p>Parameters:</p>
+<ul>
+<li><p><strong>response must be a HttpResponse.</strong></p>
+</li>
+<li><p><strong>callback must be a Function.</strong></p>
+</li>
+</ul></div></div><div class="code"><div class="wrapper">  asJSON: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(response, callback)</span></span>{
+    <span class="hljs-keyword">var</span> data = [];
+    response.on(<span class="hljs-string">"data"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(chunk)</span></span>{
+      data.push(chunk);
+    });
+    response.on(<span class="hljs-string">"end"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+      <span class="hljs-keyword">var</span> result = <span class="hljs-built_in">JSON</span>.parse(data.toString());
+      <span class="hljs-keyword">if</span> (result.hasOwnProperty(<span class="hljs-string">"error"</span>)){
+        callback(result);
+      }<span class="hljs-keyword">else</span>{
+        callback(<span class="hljs-literal">null</span>, format.camelCaseFields(result));
+      }
+    });
+  }
+};</div></div></div></div></body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head><title>factories/modal</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="factories/modal"><meta name="groc-project-path" content="lib/client/scripts/factories/modal.js"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/client/scripts/factories/modal.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="modal-factory">Modal Factory</h1>
+<p>Provides all functions necessary to deploy custom modal windows
+throughout the application.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">"lodash"</span>);
+<span class="hljs-comment">/*jshint-W072*/</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($q, $compile, $templateCache, $document, $rootScope, $controller, $window)</span> </span>{
+  <span class="hljs-keyword">var</span> angular = <span class="hljs-built_in">window</span>.angular,
+    openState = <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">return</span> {
+    isOpen: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+      $rootScope.modal = {isOpen: openState};
+      <span class="hljs-keyword">return</span> openState;
+    },
+    open: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(options)</span> </span>{
+
+      <span class="hljs-keyword">var</span> deferred, modalInstance, template, bodyDom, modalDom, modalScope, ctrlInstance, ctrlLocals, remove;
+
+      deferred = $q.defer();
+
+      modalInstance = {
+        result: deferred.promise,
+        close: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(result)</span> </span>{
+          remove();
+          deferred.resolve(result);
+        },
+        dismiss: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(reason)</span> </span>{
+          remove();
+          deferred.reject(reason);
+        },
+        rebuildBinding: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+          <span class="hljs-keyword">var</span> <span class="hljs-built_in">window</span> = angular.element($<span class="hljs-built_in">window</span>);
+          <span class="hljs-built_in">window</span>.bind(<span class="hljs-string">"scroll"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">this</span>.scrollTo(<span class="hljs-number">0</span>, !!$rootScope.modalSettings ? $rootScope.modalSettings.coordinates.y : <span class="hljs-number">0</span>);
+            $rootScope.$apply();
+          });
+        }
+      };
+
+      remove = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        modalScope.$destroy();
+        $<span class="hljs-built_in">document</span>.unbind(<span class="hljs-string">"keydown"</span>);
+        modalDom.remove();
+        openState = <span class="hljs-literal">false</span>;
+        $rootScope.modal = {isOpen: openState};
+        $rootScope.$broadcast(<span class="hljs-string">"modal closing"</span>);
+      };</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Create a new scope for the modal.</p></div></div><div class="code"><div class="wrapper">      modalScope = $rootScope.$<span class="hljs-keyword">new</span>();</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Create a new controller for the modal and add locals to it.</p></div></div><div class="code"><div class="wrapper">      ctrlLocals = {};
+      ctrlLocals.$scope = modalScope;
+      ctrlLocals.$modalInstance = modalInstance;
+      ctrlLocals.$scope.closeModal = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+        modalInstance.dismiss(<span class="hljs-string">"cancel"</span>);
+      };
+      _.forEach(options.data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(val, key)</span> </span>{
+        ctrlLocals[key] = val;
+      });
+      ctrlInstance = $controller(options.controller, ctrlLocals);</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Get the template, wrap it in our rzModalWindow, compile, and append to the body.</p></div></div><div class="code"><div class="wrapper">      bodyDom = $<span class="hljs-built_in">document</span>.find(<span class="hljs-string">"body"</span>).eq(<span class="hljs-number">0</span>);
+      template = $templateCache.get(options.templateUrl);
+      modalDom = angular.element(<span class="hljs-string">"&lt;div s-modal-window&gt;&lt;/div&gt;"</span>);
+      modalDom.html(template);
+      modalDom = $compile(modalDom)(modalScope);
+      bodyDom.append(modalDom);
+
+      openState = <span class="hljs-literal">true</span>;
+      $rootScope.modal = {isOpen: openState};</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Dismiss modal on &quot;escape&quot; key</p></div></div><div class="code"><div class="wrapper">      $<span class="hljs-built_in">document</span>.bind(<span class="hljs-string">"keydown"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(evt)</span> </span>{
+        <span class="hljs-keyword">if</span> (evt.which === <span class="hljs-number">27</span>) {
+          $rootScope.$apply(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+            modalInstance.dismiss(<span class="hljs-string">"esc"</span>);
+          });
+        }
+      });
+
+      <span class="hljs-keyword">return</span> modalInstance;
+
+    }
+  };
+};</div></div></div></div></body></html>

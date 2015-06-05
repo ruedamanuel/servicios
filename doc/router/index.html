@@ -1,26 +1,42 @@
 <!DOCTYPE html><html lang="en"><head><title>router/index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="router/index"><meta name="groc-project-path" content="lib/client/scripts/router/index.js"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/client/scripts/router/index.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="ui-router-index">UI Router Index</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-pi">
 "use strict"</span>;
 
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($stateProvider, $urlRouterProvider)</span></span>{</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Unmatched URL route</p></div></div><div class="code"><div class="wrapper">  $urlRouterProvider.otherwise(<span class="hljs-string">"/"</span>);</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Default states</p></div></div><div class="code"><div class="wrapper">  $stateProvider
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($stateProvider, $urlRouterProvider)</span></span>{
+
+  <span class="hljs-keyword">var</span> getTemplate = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(templatePath)</span></span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($templateCache)</span></span>{
+      <span class="hljs-keyword">return</span> $templateCache.get(templatePath);
+    };
+  };</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Unmatched URL route</p></div></div><div class="code"><div class="wrapper">  $urlRouterProvider.otherwise(<span class="hljs-string">"/home"</span>);</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Default states</p></div></div><div class="code"><div class="wrapper">  $stateProvider
     .state(<span class="hljs-string">"app"</span>, {
       abstract: <span class="hljs-literal">true</span>,
       views: {
         header: {
-          templateUrl: <span class="hljs-string">"/static/views/main/header.html"</span>,
+          templateProvider: getTemplate(<span class="hljs-string">"main/header.html"</span>),
           controller: <span class="hljs-built_in">require</span>(<span class="hljs-string">"../controllers/header"</span>)
         },
         content: {
-          templateUrl: <span class="hljs-string">"/static/views/main/content.html"</span>
+          templateProvider: getTemplate(<span class="hljs-string">"main/content.html"</span>)
         },
         footer: {
-          templateUrl: <span class="hljs-string">"/static/views/main/footer.html"</span>,
+          templateProvider: getTemplate(<span class="hljs-string">"main/footer.html"</span>),
           controller: <span class="hljs-built_in">require</span>(<span class="hljs-string">"../controllers/footer"</span>)
         }
       }
     })
     .state(<span class="hljs-string">"app.home"</span>, {
       url: <span class="hljs-string">"/home"</span>,
-      templateUrl: <span class="hljs-string">"/static/views/home"</span>,
+      templateProvider: getTemplate(<span class="hljs-string">"home/index.html"</span>),
       controller: <span class="hljs-built_in">require</span>(<span class="hljs-string">"../controllers/home"</span>)
+    })
+    .state(<span class="hljs-string">"app.search"</span>, {
+      url: <span class="hljs-string">"/search?query"</span>,
+      templateProvider: getTemplate(<span class="hljs-string">"search/index.html"</span>),
+      controller: <span class="hljs-built_in">require</span>(<span class="hljs-string">"../controllers/search"</span>)
+    })
+    .state(<span class="hljs-string">"app.provider"</span>, {
+      url: <span class="hljs-string">"/provider/:alias"</span>,
+      templateProvider: getTemplate(<span class="hljs-string">"providerProfile/public.html"</span>),
+      controller: <span class="hljs-built_in">require</span>(<span class="hljs-string">"../controllers/providerProfile"</span>)
     });
 };</div></div></div></div></body></html>

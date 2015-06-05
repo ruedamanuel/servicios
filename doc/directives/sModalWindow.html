@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><title>directives/sModalWindow</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="directives/sModalWindow"><meta name="groc-project-path" content="lib/client/scripts/directives/sModalWindow.js"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/client/scripts/directives/sModalWindow.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="modal-window-directive">Modal Window Directive</h1>
+<p>Creates a modal window with a proprietary controller and
+functionality.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($log, $window, $rootScope, $templateCache)</span> </span>{
+  <span class="hljs-keyword">var</span> angular = <span class="hljs-built_in">window</span>.angular;
+  <span class="hljs-keyword">return</span> {
+    restrict: <span class="hljs-string">"A"</span>,
+    template: $templateCache.get(<span class="hljs-string">"directives/sModalWindow.html"</span>),
+    transclude: <span class="hljs-literal">true</span>,
+    replace: <span class="hljs-literal">true</span>,
+    link: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(scope, element)</span> </span>{
+
+      <span class="hljs-keyword">var</span> <span class="hljs-built_in">window</span> = angular.element($<span class="hljs-built_in">window</span>);
+
+      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span>{
+        scope.modalY = <span class="hljs-built_in">window</span>[<span class="hljs-number">0</span>].pageYOffset;
+        $rootScope.modalSettings = {
+          coordinates: {
+            x: <span class="hljs-number">0</span>,
+            y: scope.modalY
+          }
+        };
+        element.css(<span class="hljs-string">"top"</span>, scope.modalY + <span class="hljs-string">"px"</span>);</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We need to make sure that the modal window has focus.
+Get the DOM element being transcluded into the modal window.
+Give focus to the first input or button element within that transcluded element.
+If there are no inputs or buttons, give focus to the close button.</p></div></div><div class="code"><div class="wrapper">        <span class="hljs-keyword">var</span> e = element[<span class="hljs-number">0</span>], inputElem, closeElem, targetElem;
+        inputElem = e.querySelector(<span class="hljs-string">".modal-wrapper &gt; [ng-transclude]"</span>).querySelector(<span class="hljs-string">"input, button"</span>);
+        closeElem = e.querySelector(<span class="hljs-string">".modal-wrapper &gt; a"</span>);
+        targetElem = inputElem || closeElem;
+        targetElem.focus();
+      }</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Function to make sure the modal occupies the whole window and disables scrolling when open.</p></div></div><div class="code"><div class="wrapper">      <span class="hljs-built_in">window</span>.bind(<span class="hljs-string">"scroll"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">this</span>.scrollTo(<span class="hljs-number">0</span>, scope.modalY);
+        element.css(<span class="hljs-string">"top"</span>, scope.modalY + <span class="hljs-string">"px"</span>);
+        scope.$apply();
+      });
+
+      init();
+
+      scope.$on(<span class="hljs-string">"$destroy"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-built_in">window</span>.unbind(<span class="hljs-string">"scroll"</span>);
+      });
+
+    }
+  };
+};</div></div></div></div></body></html>

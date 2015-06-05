@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en"><head><title>lib/client/less/modal</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="lib/client/less/modal"><meta name="groc-project-path" content="lib/client/less/modal.less"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/client/less/modal.less</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-comment">/**
+ * Styles for Modal window
+ */</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><hr>
+<p>Modals</p></div></div><div class="code"><div class="wrapper"><span class="hljs-comment">//the wrapper that takes over the entire screen</span>
+<span class="hljs-class">.modal-global</span> {
+  <span class="hljs-attribute">position</span><span class="hljs-value">: absolute;</span>
+  <span class="hljs-attribute">z-index</span><span class="hljs-value">: <span class="hljs-number">999</span>;</span>
+  <span class="hljs-attribute">top</span><span class="hljs-value">: <span class="hljs-number">0</span>;</span>
+  <span class="hljs-attribute">left</span><span class="hljs-value">: <span class="hljs-number">0</span>;</span>
+  <span class="hljs-attribute">width</span><span class="hljs-value">: <span class="hljs-number">100%</span>;</span>
+  <span class="hljs-attribute">height</span><span class="hljs-value">: <span class="hljs-number">100%</span> + <span class="hljs-number">100px</span>;</span>
+  <span class="hljs-attribute">padding-top</span><span class="hljs-value">: <span class="hljs-number">3%</span>;</span>
+  <span class="hljs-attribute">background-color</span><span class="hljs-value">: @accent_alpha;</span>
+  <span class="hljs-attribute">text-align</span><span class="hljs-value">: center;</span>
+}
+
+<span class="hljs-comment">//the wrapper for the content inside the modal</span>
+<span class="hljs-comment">//the 'top' argument of this element is set in modal.js in the scroll listener</span>
+<span class="hljs-class">.modal-wrapper</span> {
+  <span class="hljs-attribute">position</span><span class="hljs-value">: relative;</span>
+  <span class="hljs-attribute">display</span><span class="hljs-value">: inline-block;</span>
+  <span class="hljs-attribute">padding</span><span class="hljs-value">: <span class="hljs-number">2em</span>;</span>
+  <span class="hljs-attribute">margin</span><span class="hljs-value">: <span class="hljs-number">1em</span>;</span>
+  <span class="hljs-attribute">background-color</span><span class="hljs-value">: @background;</span>
+  <span class="hljs-attribute">border</span><span class="hljs-value">: <span class="hljs-number">2px</span> solid @accent;</span>
+  <span class="hljs-attribute">border-radius</span><span class="hljs-value">: <span class="hljs-number">6px</span>;</span>
+  <span class="hljs-attribute">max-width</span><span class="hljs-value">: <span class="hljs-number">100%</span>;</span>
+}
+
+<span class="hljs-comment">//the element that on click will close the modal window (x at the top right corner)</span>
+<span class="hljs-class">.modal-close</span> {
+  <span class="hljs-attribute">position</span><span class="hljs-value">: absolute;</span>
+  <span class="hljs-attribute">top</span><span class="hljs-value">: <span class="hljs-number">6px</span>;</span>
+  <span class="hljs-attribute">right</span><span class="hljs-value">: <span class="hljs-number">6px</span>;</span>
+}
+
+<span class="hljs-class">.anchor-close</span> {
+  <span class="hljs-attribute">color</span><span class="hljs-value">: @primary;</span>
+  <span class="hljs-attribute">font-size</span><span class="hljs-value">: <span class="hljs-number">3em</span>;</span>
+  <span class="hljs-attribute">line-height</span><span class="hljs-value">: <span class="hljs-number">0.3em</span>;</span>
+}
+
+<span class="hljs-class">.anchor-close</span><span class="hljs-pseudo">:hover</span> {
+  <span class="hljs-attribute">color</span><span class="hljs-value">: @highlight;</span>
+  <span class="hljs-attribute">text-decoration</span><span class="hljs-value">: none;</span>
+}
+
+<span class="hljs-class">.modal-header</span>{
+  <span class="hljs-attribute">color</span><span class="hljs-value">: @primary;</span>
+  <span class="hljs-attribute">margin</span><span class="hljs-value">: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1em</span> <span class="hljs-number">0</span>;</span>
+  <span class="hljs-attribute">padding-bottom</span><span class="hljs-value">: <span class="hljs-number">0.2em</span>;</span>
+}
+
+<span class="hljs-comment">//.modal-show {</span>
+<span class="hljs-comment">//@include simple-ease(opacity, 0.3s, ease-in);</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p> opacity: 1;</p></div></div><div class="code"><div class="wrapper"><span class="hljs-comment">//}</span>
+<span class="hljs-comment">//.modal-hide {</span>
+<span class="hljs-comment">//@include simple-ease(opacity, 0.3s, ease-out);</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p> opacity: 0;</p></div></div><div class="code"><div class="wrapper"><span class="hljs-comment">//}</span>
+<span class="hljs-class">.login-dialog</span>{
+  <span class="hljs-attribute">width</span><span class="hljs-value">: <span class="hljs-number">100%</span>;</span>
+  <span class="hljs-attribute">max-width</span><span class="hljs-value">: <span class="hljs-number">600px</span>;</span>
+  <span class="hljs-attribute">text-align</span><span class="hljs-value">: center;</span>
+  <span class="hljs-attribute">display</span><span class="hljs-value">: block;</span>
+}
+<span class="hljs-class">.login-button-box</span>{
+  <span class="hljs-attribute">margin-bottom</span><span class="hljs-value">: <span class="hljs-number">1em</span>;</span>
+}</div></div></div></div></body></html>

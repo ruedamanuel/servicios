@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="en"><head><title>controllers/providerProfile</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="controllers/providerProfile"><meta name="groc-project-path" content="lib/client/scripts/controllers/providerProfile.js"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/client/scripts/controllers/providerProfile.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="provider-profile-controller">Provider Profile Controller</h1>
+<p>Controls the actions of the public profile that a given
+service provider puts together.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($scope, $stateParams, Provider, Review, Modal)</span></span>{
+  <span class="hljs-built_in">console</span>.log($stateParams);
+  $scope.profile = {
+    name: <span class="hljs-string">"Provider 1"</span>,
+    address: <span class="hljs-string">"Carrera 5 # 75 - 11"</span>,
+    city: <span class="hljs-string">"Bogota"</span>,
+    state: <span class="hljs-string">"Cundinamarca"</span>,
+    country: <span class="hljs-string">"Colombia"</span>,
+    icon: <span class="hljs-string">"icon-man.png"</span>,
+    telephones: [
+      {type: <span class="hljs-string">"Principal"</span>, number: <span class="hljs-number">9173555538</span>, ext: <span class="hljs-number">123</span>},
+      {type: <span class="hljs-string">"Móvil"</span>, number: <span class="hljs-number">3153555538</span>}
+    ],
+    schedule: {
+      openTime: <span class="hljs-string">"09:00:00"</span>,
+      closeTime: <span class="hljs-string">"17:00:00"</span>
+    }
+  };
+  <span class="hljs-keyword">if</span>($stateParams.hasOwnProperty(<span class="hljs-string">"alias"</span>)){
+    Provider.getByAlias($stateParams.alias)
+      .success(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(providerInfo)</span></span>{
+        <span class="hljs-built_in">console</span>.log(providerInfo);
+        $scope.profile = providerInfo[<span class="hljs-number">0</span>];
+        $scope.getReviews();
+      })
+      .error(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span></span>{
+        <span class="hljs-built_in">console</span>.error(e);
+      });
+  }
+  $scope.getReviews = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+    Review.getByProvider($scope.profile.id)
+      .success(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(reviews)</span></span>{
+        $scope.reviews = reviews;
+      })
+      .error(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span></span>{
+        <span class="hljs-built_in">console</span>.error(e);
+      });
+  };
+  $scope.openReview = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+    Modal.open({
+      templateUrl: <span class="hljs-string">"modals/login.html"</span>,
+      controller: <span class="hljs-built_in">require</span>(<span class="hljs-string">"../controllers/modals/login"</span>)
+      <span class="hljs-comment">//data: { algo: algo , schedule: data}</span>
+    });
+  };
+};</div></div></div></div></body></html>

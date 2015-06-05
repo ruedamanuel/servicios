@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"><head><title>lib/server/routes/oauth</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="lib/server/routes/oauth"><meta name="groc-project-path" content="lib/server/routes/oauth.js"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">lib/server/routes/oauth.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="oauth-routes">OAuth Routes</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-pi">
+"use strict"</span>;
+
+<span class="hljs-keyword">var</span> oauth = {
+    facebook: <span class="hljs-built_in">require</span>(<span class="hljs-string">"../services/facebook"</span>),
+    google: <span class="hljs-built_in">require</span>(<span class="hljs-string">"../services/google"</span>)
+  },
+  log = <span class="hljs-built_in">require</span>(<span class="hljs-string">"../utils/logger"</span>);
+
+<span class="hljs-built_in">module</span>.exports = {</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method OAuth.login</span></p>
+<p>Starts the login / signup process with a given OAuth service
+provider.</p>
+<p>Parameters:</p>
+<ul>
+<li><p><strong>req must be a HttpRequest.</strong></p>
+</li>
+<li><p><strong>res must be a HttpResponse.</strong></p>
+</li>
+</ul></div></div><div class="code"><div class="wrapper">  login: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span></span>{
+    log.info(<span class="hljs-string">"Request Origin: "</span>, !!req.query.origin ? req.query.origin : <span class="hljs-string">"not defined"</span>);
+    req.session.origin = !!req.query.origin ? req.query.origin : <span class="hljs-string">"/#/home"</span>;
+
+    <span class="hljs-keyword">if</span> (!!req.session.oauth[req.params.oauthProvider]){
+      oauth[req.session.oauth.provider].getUser(req)
+        .then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+          res.redirect(req.session.origin);
+        })
+        .catch(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span></span>{
+          log.error(<span class="hljs-string">"Problem with OAuth: "</span>, e);
+          req.session.oauth = {
+            provider: req.params.oauthProvider
+          };
+          log.info(req.session.origin);
+          <span class="hljs-comment">//TODO: generate stronger state</span>
+          req.session.state = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime();
+          res.redirect(oauth[req.params.oauthProvider].getLoginUrl(req));
+        });
+    }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (oauth.hasOwnProperty(req.params.oauthProvider)){
+      req.session.oauth = {
+        provider: req.params.oauthProvider
+      };
+      log.info(req.session.origin);
+      <span class="hljs-comment">//TODO: generate stronger state</span>
+      req.session.state = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime();
+      res.redirect(oauth[req.params.oauthProvider].getLoginUrl(req));
+    }<span class="hljs-keyword">else</span>{
+      res.status(<span class="hljs-number">404</span>).send(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Provider not found"</span>));
+    }
+  },</div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method OAuth.redirect</span></p>
+<p>Handler for the redirect URI used by OAuth service providers.</p>
+<p>Parameters:</p>
+<ul>
+<li><p><strong>req must be a HttpRequest.</strong></p>
+</li>
+<li><p><strong>res must be a HttpResponse.</strong></p>
+</li>
+</ul></div></div><div class="code"><div class="wrapper">  redirect: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span></span>{
+    <span class="hljs-keyword">if</span>(req.query.hasOwnProperty(<span class="hljs-string">"error"</span>)){
+      res.status(<span class="hljs-number">401</span>).send(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(req.query.error));
+    }<span class="hljs-keyword">else</span>{
+      <span class="hljs-keyword">if</span> (oauth.hasOwnProperty(req.params.oauthProvider)){
+        <span class="hljs-keyword">if</span>(req.query.hasOwnProperty(<span class="hljs-string">"state"</span>) &amp;&amp;
+          req.query.state === req.session.state.toString()){
+          oauth[req.params.oauthProvider].getAccessToken(req)
+            .then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span></span>{
+              req.session.oauth[req.session.oauth.provider] = data;
+              <span class="hljs-keyword">return</span> oauth[req.session.oauth.provider].getUser(req);
+            })
+            .then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(user)</span></span>{
+              req.session.oauth[req.session.oauth.provider].user = user;
+              <span class="hljs-comment">//res.status(200).send(req.session.oauth[req.session.oauth.provider]);</span>
+              res.redirect(req.session.origin);
+            })
+            .catch(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span></span>{
+              res.status(<span class="hljs-number">500</span>).send(e);
+            });
+        }<span class="hljs-keyword">else</span>{
+          log.warn(<span class="hljs-string">"Cross Site Request Forgery attempted"</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toString());
+          res.status(<span class="hljs-number">401</span>).send(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"CSRF Attempt Identified"</span>));
+        }
+      }<span class="hljs-keyword">else</span>{
+        res.status(<span class="hljs-number">404</span>).send(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Provider not found"</span>));
+      }
+    }
+  }
+};</div></div></div></div></body></html>

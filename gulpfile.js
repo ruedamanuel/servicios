@@ -93,7 +93,7 @@ gulp.task("build-template-cache", function () {
  * Bower Tasks
  */
 gulp.task("get-bower-files", function(){
-  return gulp.src(mainBowerFiles(), "./bower_components")
+  return gulp.src(mainBowerFiles(),["./bower_components"])
     .pipe(gulp.dest("./static/vendor"));
 });
 

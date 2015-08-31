@@ -1,0 +1,29 @@
+DROP PROCEDURE IF EXISTS `DeleteUser`;
+
+DELIMITER ;;
+ 
+CREATE PROCEDURE `DeleteUser` (
+	IN userId INT
+)
+LANGUAGE SQL
+NOT DETERMINISTIC
+SQL SECURITY DEFINER
+COMMENT 'Deletes a user from the db.'
+/**
+ * CALL DeleteUser(123);
+ */
+BEGIN
+	DECLARE code CHAR(5);
+	DECLARE msg TEXT;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+    	BEGIN
+    		GET DIAGNOSTICS CONDITION 1
+        		code = RETURNED_SQLSTATE, msg = MESSAGE_TEXT;
+        	SELECT -1 AS `id`, code AS `error_code`, msg AS `error_message`;
+        	ROLLBACK;
+		END;
+	START TRANSACTION;
+		DELETE FROM user WHERE id = userId;
+	COMMIT;
+
+END;;
